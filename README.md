@@ -23,3 +23,12 @@ git commit -m "Descripción del cambio realizado"
 
 4. Subir los cambios
 git push origin <>
+
+6. Ir a github y asegurándote que est´sa en tu rama, hacer la solicitud del merge hacia develop dando clic en "Compare & pull request"
+
+7. Asegúrate de tener los siguientes campos de esta maner:
+    base: develop
+    compare: <tu_rama>
+
+8. Escribe un comentario y manda el pull request
+

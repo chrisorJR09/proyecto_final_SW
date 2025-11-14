@@ -11,12 +11,12 @@ La rama main está reservada para la versión final y estable del proyecto.
 
 Flujo de trabajo:<br>
 En la terminal, ir a la carpeta donde se almacenará el repositorio local 
-1. Clonar el repositorio:
+1. Clonar el repositorio:<br>
 git clone https://github.com/chrisorJR09/proyecto_final_SW.git
 
 2. Cambiar a la rama personal<br>
 git checkout <tu_rama><br>
-*Si tienes dudas de como se llama tu rama, puedes hacer un git branch -r y ahí verás todas las ramas
+*Si tienes dudas de como se llama tu rama, puedes hacer un "g"it branch -r" y ahí verás todas las ramas
 3. Hacer cambios y guardarlos<br>
 git add <nombre_del_archivo_modificado><br>
 git commit -m "Descripción del cambio realizado"

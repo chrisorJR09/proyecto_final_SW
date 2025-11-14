@@ -49,3 +49,13 @@ git checkout <tu_rama>
 git merge develop 
 (Esto hace que los cambios que hay en develop se queden en tu rama y así tengas el proyecto más actual)
 
+**Puntos a considerar**
+*Si quieres corroborar que archivos tienen cambios pero no sabes si están registrados o no
+    -Haz un: git status
+        -En rojo, los archivos modificados pero que no han sido registrados por git 
+        -En verde, los archivos modificados que ya se regsitraron en git
+*Recuerda estar en la carpeta del repositorio local
+    -Para moverte entre carpetas el comando es:
+        -cd <nombre_de_carpeta>
+    -Para retroceder es:
+        -cd..

@@ -1,0 +1,82 @@
+
+/* Estilos en general para fuente espaciado etc */
+.root{
+
+}
+
+html, body {
+  height: 100%;   /* Importante */
+  margin: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* Cosas del Header */
+
+#divH{
+    
+    height: 150px;
+    border: 10px solid #243753;
+
+}
+
+header{
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+header h2{
+    grid-column: 2 ;
+    justify-self: center;
+    
+}
+
+header div{
+    /* Content */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Self */
+    grid-column: 3 ;
+    justify-self: center;
+}
+/* Botones header */
+.enters{
+    padding: 10px;
+    width: 150px;
+    margin: 20px;
+    margin-top: 60px;
+}
+
+/* Cosas del Main */
+main{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center; /* vertical */
+    justify-content: center; /* horizontal */
+}
+
+/* Cosas del Footer */
+footer{
+   
+    border: 10px solid rgb(36, 55, 83);
+
+}
+
+.horList{
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-evenly;  
+}
+
+
+
+

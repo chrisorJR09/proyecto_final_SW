@@ -1,6 +1,6 @@
 /* controllers/graficaController.js */
 
-const GraficaModel = require('../model/GraficaModel');
+const GraficaModel = require('../models/GraficaModel');
 
 // GET /api/books
 const getVentasProducto = async (req, res) => {
@@ -8,7 +8,7 @@ const getVentasProducto = async (req, res) => {
         const VentasProducto = await GraficaModel.getAllVentasProducto();
         res.json(VentasProducto);
     } catch (error) {
-        console.error('Error al obtener libros:', error);
+        console.error('Error al obtener ventas:', error);
         res.status(500).json({ mensaje: 'Error al obtener libros' });
     }
 };
@@ -20,7 +20,7 @@ const getVentasProductoById = async (req, res) => {
         const VentasProducto = await GraficaModel.getVentasProductoById(id);
 
         if (!VentasProducto)
-            return res.status(404).json({ mensaje: 'Libro no encontrado' });
+            return res.status(404).json({ mensaje: 'Libro no ventas' });
 
         res.json(VentasProducto);
     } catch (error) {

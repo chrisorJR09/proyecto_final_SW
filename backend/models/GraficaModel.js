@@ -1,5 +1,5 @@
 /* model/GraficaModel.js */
-const pool = require('../db/conexion');
+const pool = require('../db_conection/conexion');
 
 // Obtener todos las Ventas
 async function getAllVentasProducto() {

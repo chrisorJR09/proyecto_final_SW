@@ -1,6 +1,9 @@
 //configuración del servidor
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
+
 
 const app=express();
 
@@ -18,6 +21,11 @@ app.get("/", (req, res)=>{
     console.log("Servidor funcionando correctamente");
     res.send("API funcionando correctamente");
 })
+
+const rutaLogin=require("./routes/auth.route");
+
+app.use("/sesion/", rutaLogin);
+
 
 //Funcion para escuchar al puerto
 app.listen(PORT, ()=>{

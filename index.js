@@ -23,7 +23,19 @@ const sectionf = document.getElementById('divF')
 const footer = document.createElement('footer');
 
 footer.innerHTML += `
-    
-`
+        <ul class="horList">
+            <div>
+                <h2>Marca</h2>
+            </div>
+            <div>
+                <h2>Ubicacion</h2>
+            </div>
+            <div>
+                <h2>Carrera</h2>
+            </div>
+        </ul>
+`;
+
+sectionf.appendChild(footer);
 
 

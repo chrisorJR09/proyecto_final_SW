@@ -65,6 +65,11 @@ main{
 }
 
 /* Cosas del Footer */
+
+#divF{
+    display: block;
+}
+
 footer{
    
     border: 10px solid rgb(36, 55, 83);

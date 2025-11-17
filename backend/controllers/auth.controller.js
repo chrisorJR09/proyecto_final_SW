@@ -1,5 +1,6 @@
 
-const usuario_DB=require("../models/user.model");
+const { json } = require("express");
+const {usuario_DB, agregarUsuario, validaUsuario, validaCorreo}=require("../models/user.model");
 const jwt=require("jsonwebtoken");
 
 const login= async (req,res)=>{
@@ -36,5 +37,31 @@ const login= async (req,res)=>{
 
 }
 
+const newUser=async (req,res)=>{
+    const{userName, password, email, nombre, apellido}=req.body;
 
-module.exports={login};
+    if(!userName || !password || !email || !nombre || !apellido)
+        return res.status(400).json("Error. Campos incompletos");
+    try{
+
+        const validacionUsuario= await validaUsuario(userName);
+        if(validacionUsuario)
+            return res.status(401).json({message: "El usuario ya está registrado."}); 
+        const validacionCorreo= await validaCorreo(email);
+        if (validacionCorreo)
+            return res.status(401).json({message: "El correo ya está registrado."});
+
+        const nuevo_usuario= await agregarUsuario(userName, password, email, nombre, apellido);
+        return res.status(201).json({
+            mensaje: `Usuario ${userName} agregado.`,
+            idUsuario:
+             nuevo_usuario
+        });
+    }catch(error){
+        res.status(500).json({message: "Error en el servidor"});
+    }
+}
+
+
+
+module.exports={login, newUser};

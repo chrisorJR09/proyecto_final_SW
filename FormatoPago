@@ -1,0 +1,242 @@
+// Mostrar/ocultar formularios de pago
+const formTarjeta = document.getElementById("formTarjeta");
+const formTransferencia = document.getElementById("formTransferencia");
+const formOxxo = document.getElementById("formOxxo");
+
+document.querySelectorAll("input[name='pago']").forEach(radio => {
+    radio.addEventListener("change", () => {
+        const metodo = radio.value;
+
+        formTarjeta.classList.add("hidden");
+        formTransferencia.classList.add("hidden");
+        formOxxo.classList.add("hidden");
+
+        if (metodo === "tarjeta") formTarjeta.classList.remove("hidden");
+        if (metodo === "transferencia") formTransferencia.classList.remove("hidden");
+        if (metodo === "oxxo") formOxxo.classList.remove("hidden");
+    });
+});
+
+
+// Guardar datos en localStorage
+function guardarDatos() {
+    const datos = {
+        nombre: document.getElementById("nombre").value,
+        direccion: document.getElementById("direccion").value,
+        ciudad: document.getElementById("ciudad").value,
+        estado: document.getElementById("estado").value,
+        cp: document.getElementById("cp").value,
+        telefono: document.getElementById("telefono").value,
+        notas: document.getElementById("notas").value
+    };
+
+    localStorage.setItem("envioDatos", JSON.stringify(datos));
+    alert("Datos guardados correctamente.");
+}
+
+// Cargar datos guardados
+function cargarDatos() {
+    const datos = JSON.parse(localStorage.getItem("envioDatos"));
+    if (!datos) return alert("No hay datos guardados.");
+
+    document.getElementById("nombre").value = datos.nombre;
+    document.getElementById("direccion").value = datos.direccion;
+    document.getElementById("ciudad").value = datos.ciudad;
+    document.getElementById("estado").value = datos.estado;
+    document.getElementById("cp").value = datos.cp;
+    document.getElementById("telefono").value = datos.telefono;
+    document.getElementById("notas").value = datos.notas;
+
+    alert("Datos recuperados.");
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef1f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 18px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    color: #4a4a4a;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #cdd2d9;
+    border-radius: 8px;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.buttons {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #0f62fe;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button.ghost {
+    background: transparent;
+    color: #0f62fe;
+    border: 1px solid #0f62fe;
+}
+
+.subcard {
+    margin-top: 10px;
+    padding: 15px;
+    background: #f6f8fa;
+    border-radius: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Envío y Pago</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Formulario de Envío + Métodos de Pago (Simulación)</h1>
+
+    <!-- DATOS DE ENVÍO -->
+    <section class="card">
+        <h2>1. Datos de Envío</h2>
+
+        <form id="shippingForm">
+            <label>Nombre Completo</label>
+            <input type="text" id="nombre" required>
+
+            <label>Dirección</label>
+            <input type="text" id="direccion" required>
+
+            <div class="row">
+                <div>
+                    <label>Ciudad</label>
+                    <input type="text" id="ciudad" required>
+                </div>
+
+                <div>
+                    <label>Estado</label>
+                    <input type="text" id="estado">
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Código Postal</label>
+                    <input type="text" id="cp" required>
+                </div>
+                <div>
+                    <label>Teléfono</label>
+                    <input type="text" id="telefono" required>
+                </div>
+            </div>
+
+            <label>Notas (opcional)</label>
+            <textarea id="notas"></textarea>
+
+            <div class="buttons">
+                <button type="button" onclick="guardarDatos()">Guardar Datos</button>
+                <button type="button" onclick="cargarDatos()" class="ghost">Recuperar datos</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- MÉTODO DE PAGO -->
+    <section class="card">
+        <h2>2. Método de Pago</h2>
+
+        <label><input type="radio" name="pago" value="tarjeta" checked> Tarjeta</label>
+        <label><input type="radio" name="pago" value="transferencia"> Transferencia</label>
+        <label><input type="radio" name="pago" value="oxxo"> OXXO</label>
+
+        <!-- FORMULARIO TARJETA -->
+        <div id="formTarjeta" class="subcard">
+            <label>Número de Tarjeta</label>
+            <input type="text" id="numTarjeta">
+
+            <label>Nombre en la Tarjeta</label>
+            <input type="text" id="nombreTarjeta">
+
+            <div class="row">
+                <div>
+                    <label>Expiración</label>
+                    <input type="text" placeholder="MM/AA" id="exp">
+                </div>
+
+                <div>
+                    <label>CVV</label>
+                    <input type="text" id="cvv">
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO TRANSFERENCIA -->
+        <div id="formTransferencia" class="subcard hidden">
+            <label>Banco</label>
+            <input type="text" id="banco">
+
+            <label>Titular</label>
+            <input type="text" id="titular">
+
+            <label>CLABE</label>
+            <input type="text" id="clabe">
+        </div>
+
+        <!-- FORMULARIO OXXO -->
+        <div id="formOxxo" class="subcard hidden">
+            <p>Se generará un código OXXO (simulado).</p>
+
+            <label>Nombre del Pagador</label>
+            <input type="text" id="nombreOxxo">
+        </div>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -5,6 +5,8 @@ const jwt=require("jsonwebtoken");
 const svgCaptcha = require("svg-captcha");
 
 let CAPTCHA_GENERADO="";
+const intentos={};
+const bloqueos={};
 
 
 const login= async (req,res)=>{
@@ -15,6 +17,19 @@ const login= async (req,res)=>{
         return res.status(400).json({error: "Faltan crendenciales"});
     }
 
+    if (!intentos[user]) {
+        intentos[user] = 0;
+    }
+    const ahora=Date.now();//obtenemos la hora
+    
+
+    if(bloqueos[user] && ahora <bloqueos[user]){
+        const segundos = Math.ceil((bloqueos[user]-ahora)/1000);
+        return res.status(403).json({
+            Error: `Cuenta bloqueada. Intente de nuevo en ${segundos} segundos`
+        });
+    }
+    
     try{
         //console.log("Aqui si llega el codigo")
         const correct_user=await obtenerUsuario(user);
@@ -25,7 +40,15 @@ const login= async (req,res)=>{
         }
         
         if(correct_user.password !== password){
-            return res.status(401).json({"Error": "Contraseña incorrecta"});
+            intentos[user]++;
+            console.log(intentos[user]);
+            if (intentos[user]>2){
+                bloqueos[user]= ahora + (5*60*1000);
+                intentos[user]=0;
+                return res.status(403).json({Error: "Cuenta bloqueada por 5 minutos"}); 
+            }
+            
+            return res.status(401).json({Error: `Contraseña incorrecta. Intentos ${intentos[user]} de 3`});
         }
 
         const captcha_validado= validaCaptcha(captcha);
@@ -33,6 +56,10 @@ const login= async (req,res)=>{
         if(!captcha_validado){
             return res.status(401).json({"Error": "captcha invalido"});
         }
+
+         // Si llegó hasta aquí: login exitoso
+        intentos[user] = 0;  // Reiniciar intentos
+        delete bloqueos[user];
 
         const token = jwt.sign(
             {id: correct_user.idUser, role: correct_user.rol},

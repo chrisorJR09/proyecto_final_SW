@@ -1,1 +1,1 @@
-console.log(`Hola nacos idiotas`);
+console.log(`Detox la menos`);

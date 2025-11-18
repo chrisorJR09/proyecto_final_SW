@@ -83,5 +83,49 @@ footer{
 }
 
 
+/* Login */
+/* Hace falta hacer que se desaparezca el inicio para que solo aparezca el login */
+
+#formLgn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self:flex-start;
+} 
+
+#formLgn div form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    border: 10px solid rgb(36, 55, 83);
+}
+
+.formBtn {
+    width: 100px;
+    height: 50px;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
+#formReg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self:flex-start;
+}
+
+#formReg form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    border: 10px solid rgb(36, 55, 83);
+}
+
+
+
 
 

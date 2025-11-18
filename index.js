@@ -1,5 +1,7 @@
 
-/*  */
+
+
+/* Header Dinamico */
 /* getelementsByTagName devuelve un array de elementos entonces usamos querySelector para agarrar el primer header */
 
 const sectionh = document.getElementById('divH')
@@ -16,9 +18,9 @@ header.innerHTML += `
     </div>
     
 `;
-
 sectionh.appendChild(header);
 
+/* Footer Dinamico*/
 const sectionf = document.getElementById('divF')
 const footer = document.createElement('footer');
 
@@ -38,4 +40,11 @@ footer.innerHTML += `
 
 sectionf.appendChild(footer);
 
+/* Login Form */
+const boton = document.getElementById("logBtn");
 
+boton.addEventListener("click", (e) => {
+    /* Desaparece el formulario de Login y aparece inicio */
+    e.preventDefault();
+    
+});

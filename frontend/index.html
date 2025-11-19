@@ -12,6 +12,8 @@
     <!-- Header -->
      <div id="divH">
         
+
+        
      </div>
     
 
@@ -31,7 +33,20 @@
                     <label for="password">Contraseña</label>
                     <input type="password" name="password" id="password" required>
 
-                   <div class="g-recaptcha" data-sitekey="llabe_de_google"></div>
+
+                    <!-- Captcha -->
+                    <label for="captcha">Captcha</label>
+                    <input type="text" name="captcha" id="captchaL">
+
+                  <div>
+                    <!-- Captcha imagen -->
+                  </div>
+
+                    <div class="unregistered">
+                        <p>No tienes cuenta?</p>
+                        <a href="#formReg">Registrarse</a>
+                    </div>
+                    
 
                     <button type="submit" class="formBtn">Aceptar</button>
                 </form>
@@ -44,7 +59,12 @@
         <section id="formReg">
             <form action="url" method="POST">
                 <h2>Registrate</h2>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
                 
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" required>
+
                 <label for="username">Usuario</label>
                 <input type="text" id="usernameR" name="username" required>
 
@@ -57,9 +77,52 @@
                 <label for="confirmpassword">Confirmar Contraseña</label>
                 <input type="password" id="confirmpasswordR" name="confirmpasswordR" required>
 
+                <label for="text">Captcha</label>
+                <section>
+                    <!-- Imagen captcha -->
+                </section>
+
+                <input type="captcha" id="captchaR" name="captcha" required>
                 <button type="submit" class="formBtn">Crear Cuenta</button>
                 
             </form>
+        </section>
+
+        <section id="nosotros">
+            <div class="usPfl">
+                <div class="usImgs">
+                    <h2>Chris</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+
+                </div>
+                <div class="usImgs">
+                    <h2>Andrea</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+                </div>
+                <div class="usImgs">
+                    <h2>Nacho</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+                </div>
+                <div class="usImgs">
+                    <h2>Alexa</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+                </div>
+                <div class="usImgs">
+                    <h2>Angel</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+                </div>
+                <div class="usImgs">
+                    <h2>Octavio</h2>
+                    <img src="" alt="">
+                    <p>hola soy yo</p>
+                </div>
+
+            </div>
         </section>
         
     </main>

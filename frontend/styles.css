@@ -47,6 +47,13 @@ header div{
     grid-column: 3 ;
     justify-self: center;
 }
+
+#mH{
+    border: 10px solid #243753;
+    margin-top: 32px;
+    width: 100%;
+    flex: 2;
+}
 /* Botones header */
 .enters{
     padding: 10px;
@@ -121,9 +128,36 @@ footer{
     flex-direction: column;
     align-items: center;
     width: 400px;
-    height: 300px;
+    height: 400px;
     border: 10px solid rgb(36, 55, 83);
 }
+
+.unregistered{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+#nosotros{
+    display: ;
+}
+.usPfl{
+    display: flex;
+    
+    gap: 20px;
+    flex-direction: row;
+
+}
+
+.usImg{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+
 
 
 

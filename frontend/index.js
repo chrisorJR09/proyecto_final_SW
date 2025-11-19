@@ -16,6 +16,14 @@ header.innerHTML += `
         /* Registrar */
         <button class="enters" id="signBtn">Registrarse</button>
     </div>
+    <div id="mH">
+            <ul>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#tienda">Tienda</a>
+                <a href="#contacto">Contactanos</a>
+            </ul>
+    </div>  
+    
     
 `;
 sectionh.appendChild(header);

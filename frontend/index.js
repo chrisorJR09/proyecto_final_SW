@@ -56,3 +56,50 @@ boton.addEventListener("click", (e) => {
     e.preventDefault();
     
 });
+
+
+
+
+
+/*Parte de mandar datos del login al backend*/
+const API_URL = "http://localhost:3000";
+function recargarCaptcha() {
+    fetch(`${API_URL}/sesion/captcha`)
+        .then(res => res.text())
+        .then(svg => {
+            document.getElementById("captchaImageL").src =
+                "data:image/svg+xml;base64," + btoa(svg);
+        });
+}
+
+function iniciarSesion() {
+        const datos = {
+            user: document.getElementById("usernameL").value, // ← CORREGIDO
+            password: document.getElementById("passwordL").value,
+            captcha: document.getElementById("captchaL").value
+        };
+
+        fetch(`${API_URL}/sesion/login`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(datos)
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            // Mostrar mensaje
+            document.getElementById("mensaje").innerText =
+                data.message?.exito || data.Error || JSON.stringify(data);
+
+            // Colores según éxito
+            if (data.message?.exito) {
+                document.getElementById("mensaje").style.color = "green";
+            } else {
+                document.getElementById("mensaje").style.color = "red";
+                recargarCaptcha();
+            }
+        });
+    }
+
+    // Generar CAPTCHA al cargar la página
+    recargarCaptcha();

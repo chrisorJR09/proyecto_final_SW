@@ -13,6 +13,8 @@ const getVentasProducto = async (req, res) => {
     }
 };
 
+
+
 // GET /api/VentasProducto/:id
 const getVentasProductoById = async (req, res) => {
     try {
@@ -30,7 +32,10 @@ const getVentasProductoById = async (req, res) => {
 };
 
 
+
+
 module.exports = {
     getVentasProducto,
     getVentasProductoById,
+    
 };

@@ -42,6 +42,13 @@ app.use('/api/productos', productosRoutes);
 const graficaRoutes = require('./routes/graficaRoutes');
 app.use('/api/ventas_producto', graficaRoutes);
 
+const VentasGeneralesRoutes = require('./routes/VentasGeneralesRoutes');
+app.use('/api/ventas_generales', VentasGeneralesRoutes);   
+
+const InventarioGraficaRoutes = require('./routes/InventarioGraficaRoutes');
+app.use('/api/inventario_grafica', InventarioGraficaRoutes);
+
+
 // Para poder acceder a las imágenes desde el front
 app.use('/uploads', express.static('uploads'));
 

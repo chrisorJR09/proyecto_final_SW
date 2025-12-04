@@ -23,3 +23,6 @@ productos.forEach(p => {
     img.width = 200;
     document.body.appendChild(img);
 });
+
+
+

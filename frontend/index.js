@@ -181,6 +181,10 @@ function recargarCaptcha() {
         });
 }
 
+
+
+
+
 function iniciarSesion() {
         const datos = {
             user: document.getElementById("usernameL").value, // ← CORREGIDO
@@ -209,6 +213,71 @@ function iniciarSesion() {
             }
         });
     }
+
+/* PRODUCTOS */
+    async function cargarProductos() {
+        try {
+            // Realizar la solicitud HTTP a la API
+            const response = await fetch(`${API_URL}/api/productos`);
+
+            // Verificar si la respuesta fue exitosa (código 200-299)
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
+            // Convertir la respuesta a formato JSON
+            const productos = await response.json();
+
+            // **Paso 3: Procesar y Renderizar los datos**
+            renderizarProductos(productos);
+
+        } catch (error) {
+            console.error('Hubo un problema al cargar los productos:', error);
+            // Mostrar un mensaje de error en la sección
+            productosSection.innerHTML += `<p style="color: red;">No se pudieron cargar los productos. Intenta más tarde.</p>`;
+        }
+    }
+
+    /* Renderizar productos en el HTML*/
+    const productosSection = document.getElementById('productos');
+    function renderizarProductos(productos) {
+    if (productos && productos.length > 0) {
+        productos.forEach(producto => {
+
+            // Crear el contenedor para cada producto
+            const productoDiv = document.createElement('div');
+            productoDiv.classList.add('producto-item'); 
+
+            // Crear el nombre
+            const nombreH3 = document.createElement('h3');
+            nombreH3.textContent = producto.nombre;
+
+            // Crear el precio
+            const precioP = document.createElement('p');
+            
+            const precioFormateado = new Intl.NumberFormat('es-MX', {
+                style: 'currency',
+                currency: 'MXN' 
+            }).format(producto.precio);
+            precioP.textContent = `Precio: ${precioFormateado}`;
+
+            // Crear la descripción
+            const descripcionP = document.createElement('p');
+            descripcionP.textContent = producto.descripcion;
+
+            // Añadir los elementos al contenedor del producto
+            productoDiv.appendChild(nombreH3);
+            productoDiv.appendChild(precioP);
+            productoDiv.appendChild(descripcionP);
+
+            // Añadir el contenedor del producto a la sección principal
+            productosSection.appendChild(productoDiv);
+        });
+    } else {
+        // En caso de que la API devuelva una lista vacía
+        productosSection.innerHTML += `<p>No hay productos disponibles actualmente.</p>`;
+    }
+}
 
     // Generar CAPTCHA al cargar la página
     recargarCaptcha();

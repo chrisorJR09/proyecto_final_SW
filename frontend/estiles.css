@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #007bff; /* Azul vibrante para botones */
     --secondary-color: #6c757d; /* Gris para texto/bordes */
@@ -55,7 +54,7 @@ main {
 
 /* --- ESTILOS DE FORMULARIOS --- */
 
-#formLgn, #formReg, #formCon {
+#formLgn, #formReg {
     width: 100%;
     max-width: 400px; /* Limita el ancho del formulario */
     background-color: var(--form-bg);
@@ -65,7 +64,7 @@ main {
 }
 
 /* Estilos de las etiquetas y campos de entrada */
-#formLgn label, #formReg label, #contactForm label{
+#formLgn label, #formReg label {
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -133,31 +132,21 @@ main {
 /* --- SECCIÓN NOSOTROS (usPfl) --- */
 
 #nosotros {
-
     width: 100%;
-    padding: 20px 0 40px 0; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: space-around;
-    
+    text-align: center;
+    padding-top: 20px;
 }
 
 #nosotros h2 {
-    
+    /* Estilo del título general de la sección, si lo hubiera */
     margin-bottom: 30px;
 }
 
 .usPfl {
     display: flex;
-    flex-wrap: wrap; 
-    
-   
-    justify-content: center; 
-    
-    gap: 100px; 
-    
-    width: 100%;
-   
+    flex-wrap: wrap; /* Permite que los perfiles salten de línea en pantallas pequeñas */
+    justify-content: center;
+    gap: 30px; /* Espacio entre las tarjetas de perfil */
 }
 
 .usImgs {
@@ -165,7 +154,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
-    width: 200px; 
+    width: 200px; /* Ancho fijo para las tarjetas de perfil */
     text-align: center;
     box-shadow: var(--shadow);
 }
@@ -178,16 +167,16 @@ main {
 }
 
 .usImgs img {
-    width: 100px; 
+    width: 100px; /* Tamaño de la imagen de perfil */
     height: 100px;
-    border-radius: 50%; 
+    border-radius: 50%; /* Hace que la imagen sea circular */
     object-fit: cover;
-    background-color: var(--background-color); 
+    background-color: var(--background-color); /* Color de fondo temporal para la imagen */
     border: 3px solid var(--primary-color);
     margin-bottom: 10px;
 }
 
-/*  HEADER Y FOOTER */
+/* --- HEADER Y FOOTER (si se desea dar un estilo básico) --- */
 
 #divH, #divF {
     width: 100%;
@@ -195,7 +184,7 @@ main {
     color: white;
     padding: 15px 0;
     text-align: center;
-    
+    /* En un sitio real, divH sería una barra de navegación completa */
 }
 
 #navegadero{
@@ -206,7 +195,7 @@ main {
 }
 
 
-
+/* Media Query para responsividad en formularios */
 @media (max-width: 450px) {
     #formLgn, #formReg {
         margin: 0 10px;
@@ -219,15 +208,17 @@ main {
     font-size: var(--logo-font);
     margin: 0;
     font-weight: bold;
+    /* Aseguramos que el logo se quede a la izquierda y no se encoja */
     flex-shrink: 0; 
 }
 
 /* NAVEGACIÓN  */ 
 #mH {
-    
+    /* Mantiene los enlaces juntos y los centra */
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); 
+    transform: translateX(-50%); /* Técnica para centrado perfecto */
+    /* Aseguramos que no cubra el logo ni los botones */
     padding-left: var(--padding-sides);
     padding-right: var(--padding-sides);
 }
@@ -250,6 +241,7 @@ main {
     font-size: 1.1em;
     padding: 5px 0;
     transition: color 0.3s, border-bottom 0.3s;
+    /* Asegúrate de que los enlaces no tengan el estilo azul de la imagen */
 }
 
 .nav-links li a:hover {
@@ -257,16 +249,17 @@ main {
     border-bottom: 2px solid var(--accent-color);
 }
 
-/* BOTONES DE LOGIN/REGISTRO (Derecha) */
+/* --- 3. BOTONES DE LOGIN/REGISTRO (Derecha) --- */
 #logs {
-    
+    /* Contenedor de los botones */
     display: flex;
     gap: 10px;
-    margin-left: auto; 
-    flex-shrink: 0; 
+    margin-left: auto; /* Empuja este elemento completamente a la derecha */
+    flex-shrink: 0; /* Asegura que los botones no se encojan */
 }
 
 .enters {
+    /* Estilos de botones (mantenidos del código anterior) */
     background-color: var(--button-bg);
     color: var(--header-bg); 
     border: none;
@@ -283,60 +276,6 @@ main {
 }
 
 
-#contactSection {
-    width: 100%;
-    
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    padding: 40px 20px;
-}
-
-#contactSection h2 {
-    color: var(--primary-color); 
-    margin-bottom: 20px;
-    font-size: 2em;
-    text-align: center;
-}
-
-
-#contactForm {
-    width: 100%;
-    max-width: 500px; 
-    padding: 20px;
-    background-color: var(--bg-form); 
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* CONTACTO */
-
-#contactForm label {
-    display: block; 
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-#contactForm input[type="text"],
-#contactForm input[type="email"],
-#contactForm textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da; 
-    border-radius: 5px;
-    box-sizing: border-box; 
-    font-size: 1em;
-    color: var(--text-color);
-    background-color: var(--input-bg); 
-}
-
-#contactForm textarea {
-    resize: vertical; 
-}
-
-/* Clases para Aparecer y desaparecer */
 .inactivo {
     display: none;
 }
@@ -344,10 +283,3 @@ main {
 .inactivo.activo{
     display: flex;
 }
-
-
-
-
-
-
-

@@ -2,27 +2,38 @@
 
 
 /* Header Dinamico */
-/* getelementsByTagName devuelve un array de elementos entonces usamos querySelector para agarrar el primer header */
 
 const sectionh = document.getElementById('divH')
 const header = document.createElement('header');
 
 /* Insertamos el header dinamico */
 header.innerHTML += `
-    <h2>Mi Título</h2>
-    <div>
-        /* Login */
-        <button class="enters" id="logBtn">login</button>
-        /* Registrar */
-        <button class="enters" id="signBtn">Registrarse</button>
+    <h2>TecnoMex</h2>
+
+    <div id="navegadero">
+         
+        <div id="mH">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio" id="iniBtn">Inicio</a></li>
+                    <li><a href="#productos" id="proBtn">Productos</a></li>
+                    <li><a href="#ofertas" id="ofeBtn"p>Ofertas</a></li>
+                    <li><a href="#contacto" id="conBtn">Contacto</a></li>
+                    
+                </ul>
+            </nav>
+        </div>  
+
+        <div id="logs">
+            
+            <button class="enters logged" id="logBtn">login</button>
+            <button class="enters logged" id="signBtn">Registrarse</button>
+
+        </div>
+        
+
     </div>
-    <div id="mH">
-            <ul>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#tienda">Tienda</a>
-                <a href="#contacto">Contactanos</a>
-            </ul>
-    </div>  
+    
     
     
 `;
@@ -41,21 +52,119 @@ footer.innerHTML += `
                 <h2>Ubicacion</h2>
             </div>
             <div>
-                <h2>Carrera</h2>
+                <a href="#nosotros" id=nosBtn>
+                <h2>Nosotros</h2>
+                </a>
             </div>
         </ul>
 `;
 
 sectionf.appendChild(footer);
 
-/* Login Form */
-const boton = document.getElementById("logBtn");
 
-boton.addEventListener("click", (e) => {
-    /* Desaparece el formulario de Login y aparece inicio */
-    e.preventDefault();
+/* FUNCION QUE CONTROLA LAS SECCIONES */
+function controlarSecciones(IDprox) {
     
-});
+    const allSections = document.querySelectorAll('main section');
+
+    allSections.forEach(section => {
+        section.classList.remove('activo');
+    });
+
+    const targetSection = document.getElementById(IDprox);
+    
+    if (targetSection) {
+        targetSection.classList.add('activo');
+    }
+}
+
+const loginBtn = document.getElementById("logBtn");
+if (loginBtn) {
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        controlarSecciones('formLgn');
+    });
+}
+
+const formBtn = document.getElementById("signBtn");
+if (formBtn) {
+    formBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        controlarSecciones('formReg');
+    });
+}
+
+const Inicio = document.getElementById("iniBtn");
+if (Inicio) {
+    Inicio.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        let mandar = Inicio.getAttribute('href');
+
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
+const productos = document.getElementById("proBtn");
+if (productos) {
+    productos.addEventListener('click', (e) => {
+        e.preventDefault();
+        let mandar = productos.getAttribute('href');
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
+const ofertas = document.getElementById("ofeBtn");
+if (ofertas) {
+    ofertas.addEventListener('click', (e) => {
+        e.preventDefault();
+        let mandar = ofertas.getAttribute('href');
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
+const contacto = document.getElementById("conBtn");
+if (contacto) {
+    contacto.addEventListener('click', (e) => {
+        e.preventDefault();
+        let mandar = contacto.getAttribute('href');
+
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
+const nosotros = document.getElementById("nosBtn");
+if (nosotros) {
+    nosotros.addEventListener('click', (e) => {
+        e.preventDefault();
+        let mandar = nosotros.getAttribute('href');
+
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
+const formBtn2 = document.getElementById("regBtn");
+if (formBtn2) {
+    formBtn2.addEventListener('click', (e) => {
+        e.preventDefault();
+        let mandar = formBtn2.getAttribute('href');
+
+        const idSeccion = mandar.substring(1);
+        
+        controlarSecciones(idSeccion);
+    });
+}
+
 
 
 

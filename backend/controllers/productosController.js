@@ -8,8 +8,8 @@ const getAllProductos = async (req, res) => {
         const productos = await ProductosModel.getAllProductos();
         res.json(productos);
     } catch (error) {
-        console.error('Error al obtener productos:', error);
-        res.status(500).json({ mensaje: 'Error al obtener productos' });
+        console.error('Error al obtener productos: hola', error);
+        res.status(500).json({ mensaje: 'Error al obtener productos hola' });
     }
 };
 

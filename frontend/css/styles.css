@@ -1,0 +1,198 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f1522; /* Fondo más oscuro */
+    color: #e4e6eb;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER ------------------------------------------------------------- */
+
+#divH {
+    height: 150px;
+    border-bottom: 4px solid #1f2c45;
+    background: #131b2c;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.6);
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+header h2 {
+    grid-column: 2;
+    justify-self: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #82b0ff;
+}
+
+header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-column: 3;
+    justify-self: center;
+    gap: 10px;
+}
+
+/* botones */
+.enters {
+    padding: 10px 18px;
+    width: 150px;
+    border-radius: 12px;
+    border: none;
+    background: #243753;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.enters:hover {
+    background: #35527d;
+    transform: scale(1.05);
+}
+
+/* Menú inferior del header */
+#mH {
+    margin-top: 25px;
+    width: 100%;
+    border-top: 2px solid #243753;
+    padding-top: 15px;
+}
+
+#mH ul {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+#mH ul a {
+    color: #a0b8d3;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+#mH ul a:hover {
+    color: #fff;
+    text-shadow: 0px 0px 5px #82b0ff;
+}
+
+/* MAIN -------------------------------------------------------------- */
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FOOTER ------------------------------------------------------------ */
+
+#divF {
+    display: block;
+}
+
+footer {
+    border-top: 3px solid #1f2c45;
+    background: #131b2c;
+    padding: 25px 0;
+    margin-top: 20px;
+}
+
+.horList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.horList h2 {
+    color: #82b0ff;
+}
+
+/* LOGIN ------------------------------------------------------------- */
+
+#formLgn, #formReg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formLgn div form, #formReg form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 400px;
+    padding: 20px;
+
+    background: #1a2335;
+    border: 3px solid #2e4063;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+}
+
+.formBtn {
+    width: 120px;
+    height: 50px;
+    margin-top: auto;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    border: none;
+    background: #243753;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.formBtn:hover {
+    background: #35527d;
+    transform: scale(1.05);
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    background: #0d1422;
+    border: 2px solid #2e4063;
+    color: #e4e6eb;
+    margin-bottom: 15px;
+}
+
+/* Registro */
+.unregistered {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+}
+
+/* Sección Nosotros */
+#nosotros {
+    display: none;
+}
+
+.usPfl {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.usImg {
+    display: flex;
+    flex-direction: column;
+}

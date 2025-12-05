@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link rel="stylesheet" href="../css/checkout.css">
+</head>
+
+<body>
+
+    <h1>Finalizar Compra</h1>
+
+    <form id="checkout-form">
+        
+        <h2>Datos de Envío</h2>
+
+        <label>Nombre Completo</label>
+        <input type="text" id="nombre" required>
+
+        <label>Correo Electrónico</label>
+        <input type="email" id="email" required>
+
+        <label>Teléfono</label>
+        <input type="text" id="telefono" required>
+
+        <label>Domicilio</label>
+        <input type="text" id="direccion" required>
+
+        <h2>Método de Pago</h2>
+
+        <div class="metodos">
+            <label>
+                <input type="radio" name="pago" value="tarjeta" required>
+                Tarjeta de crédito/débito
+            </label>
+
+            <label>
+                <input type="radio" name="pago" value="transferencia">
+                Transferencia
+            </label>
+
+            <label>
+                <input type="radio" name="pago" value="oxxo">
+                Pago en Oxxo
+            </label>
+        </div>
+
+        <div id="extra-pago"></div>
+
+        <button type="submit">Procesar Pago</button>
+    </form>
+
+    <!-- Pantalla de Procesamiento -->
+    <div id="procesando" class="oculto">
+        <div class="loader"></div>
+        <p>Procesando pago...</p>
+    </div>
+
+    <!-- Resultado Final -->
+    <div id="resultado" class="oculto"></div>
+
+    <!-- Archivo JS corregido -->
+    <script src="../js/checkout.js"></script>
+
+</body>
+</html>

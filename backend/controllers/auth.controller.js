@@ -72,6 +72,7 @@ const login= async (req,res)=>{
         });
         
     }catch(error){
+        console.error("ERROR EN LOGIN:", error);
         res.status(500).json("Error al validar la petición");
     }    
 

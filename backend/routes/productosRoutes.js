@@ -6,8 +6,8 @@ const {
     getAllProductos,
     getProductoById,
     crearProducto,
-    actualizarProducto,
-    eliminarProducto
+    //actualizarProducto,
+    //eliminarProducto
 } = require('../controllers/productosController');
 
 // Obtener todos los productos
@@ -17,12 +17,12 @@ router.get('/', getAllProductos);
 router.get('/:id', getProductoById);
 
 // Crear producto con imagen
-router.post('/', upload.single('imagen'), crearProducto);
+//router.post('/', upload.single('imagen'), crearProducto);
 
 // Actualizar producto con imagen opcional
-router.put('/:id', upload.single('imagen'), actualizarProducto);
+//router.put('/:id', upload.single('imagen'), actualizarProducto);
 
 // Eliminar producto
-router.delete('/:id', eliminarProducto);
+//router.delete('/:id', eliminarProducto);
 
 module.exports = router;

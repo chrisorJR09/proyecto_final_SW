@@ -33,6 +33,9 @@ body {
     
     /* 3. Coloca los elementos (header, main, footer) en una columna */
     flex-direction: column;
+html, body {
+  height: 100%;   /* Importante */
+  margin: 0;
 }
 
 h2 {

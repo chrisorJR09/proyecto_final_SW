@@ -1,8 +1,11 @@
 
 const express= require("express");
-const {obtenerUsuario, agregarUsuario, validaUsuario, validaCorreo}=require("../models/user.model");
+const {obtenerUsuario, agregarUsuario, validaUsuario, validaCorreo, guardarTokenReset, verificarTokenReset, actualizaPassword}=require("../models/user.model");
 const jwt=require("jsonwebtoken");
 const svgCaptcha = require("svg-captcha");
+const nodemailer=require("nodemailer");
+const crypto = require("crypto");
+
 
 let CAPTCHA_GENERADO="";
 const intentos={};
@@ -139,6 +142,93 @@ function validaCaptcha(captcha){
   return false;
 };
 
+const resetPassword= async (req, res)=>{
+    const {correo}=req.body;
+    const validacionCorreo= await validaCorreo(correo);
+    //validición de correo existente
+    if (!validacionCorreo)
+        return res.status(400).json({message: "El correo no existe en la DB."});
 
 
-module.exports={login, newUser, genCaptcha};
+    try{
+        //creación del token
+        const token = crypto.randomBytes(32).toString("hex");
+        const expiracion=Date.now() + 3600000;//expiración en una hora
+
+        await guardarTokenReset(correo, token, expiracion);
+
+        //const resetLink = `http://localhost:3000/sesion/resetPassword/${token}`;
+        const resetLink = `http://localhost:5500/new-password.html?token=${token}`;
+        
+
+        const transporter = nodemailer.createTransport({
+            service: "gmail",  // o SMTP
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        await transporter.sendMail({
+            from: '"Soporte TecnoMex" <${process.env.EMAIL_USER}>',
+            to: correo,
+            subject: "Restablece tu contraseña",
+            html: 
+            `
+            <p>Has solicitado cambiar tu contraseña. Haz clic en el enlace:</p>
+                <a href="${resetLink}" style="color: blue; font-size: 16px;">Restablecer contraseña</a>
+                <p>Este enlace expirará en <strong>1 hora</strong>.</p>
+            `
+        });
+
+        res.json({ message: "Se ha enviado un correo para restablecer la contraseña." });
+    }catch(error){
+        console.error("Error al enviar correo:", error);
+        res.status(500).json({ message: "Ocurrió un error al enviar el correo." });
+    }
+
+}
+
+
+const validarTokenReset= async(req, res)=>{
+    const {token} =req.params;
+
+    try{
+        const user =await verificarTokenReset(token);
+        if(!user){
+            return res.status(400).json({
+                message: "Token inválido o expirado"
+            });
+        }
+
+        res.json({
+            message: "Token válido.",
+            email: user.email
+        });
+
+    }catch(error){
+        console.error("Error al validar token:", error);
+        res.status(500).json({ message: "Error interno del servidor." });
+    }
+}
+
+const actualizarPasswordInDB= async (req, res)=>{
+    const {token, nvoPassword}=req.body;
+    console.log(token, nvoPassword);
+    
+    try{
+        const passwordActualizado=await actualizaPassword(token, nvoPassword);
+
+        if(!passwordActualizado)
+            return res.status(404).json({message: "No se encontró la cuenta"});
+
+        return res.status(200).json({message:"Contraseña cambiada con éxito"});
+
+    }catch(error){
+        res.status(500).json({message: "Error interno del servidor"});
+    }
+}
+
+
+
+module.exports={login, newUser, genCaptcha, resetPassword, validarTokenReset, actualizarPasswordInDB};

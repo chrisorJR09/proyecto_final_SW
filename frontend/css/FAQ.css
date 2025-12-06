@@ -1,0 +1,552 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #222;
+        }
+
+        /* HEADER */
+        .main-header {
+            width: 100%;
+            background-color: #ffffff;
+            color: #0b2f23;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e8e8e8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        .logo-img {
+            width: 80px;   /* ajusta según necesites */
+            height: auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0b2f23;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        .header-nav a {
+            color: #444;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .header-nav a:hover {
+            color: #0b2f23;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .small-link {
+            color: #444;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .small-link:hover {
+            color: #0b2f23;
+        }
+
+        .small-link:last-child {
+            background: #ffd700;
+            color: #0b2f23;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .small-link:last-child:hover {
+            background: #ffed4e;
+            color: #0b2f23;
+        }
+
+        /* HERO */
+        .faq-hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0b2f23 0%, #1a4d3a 100%);
+            color: white;
+        }
+
+        .faq-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .faq-hero p {
+            font-size: 1.2rem;
+            color: #cdeee1;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .faq-main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .faq-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-intro h2 {
+            font-size: 1.8rem;
+            color: #0b2f23;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .faq-intro p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* CATEGORÍAS */
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: #fdf8ee;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e8e8e8;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            color: #0b2f23;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .category-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* SECCIÓN DE FAQ */
+        .faq-section {
+            margin-bottom: 50px;
+        }
+
+        .faq-section-title {
+            font-size: 1.8rem;
+            color: #0b2f23;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+        }
+
+        /* ITEMS FAQ */
+        .faq-item {
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #fdf8ee;
+        }
+
+        .faq-question h3 {
+            color: #0b2f23;
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #ffd700;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px 25px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .faq-answer p {
+            color: #444;
+            line-height: 1.8;
+            font-size: 0.98rem;
+        }
+
+        .faq-answer ul {
+            margin: 15px 0 15px 20px;
+            color: #444;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        /* CONTACTO */
+        .faq-contact {
+            background: linear-gradient(135deg, #0b2f23 0%, #1a4d3a 100%);
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .faq-contact h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+            border: none;
+            padding: 0;
+        }
+
+        .faq-contact p {
+            font-size: 1.1rem;
+            color: #cdeee1;
+            margin-bottom: 25px;
+        }
+
+        .faq-contact a {
+            display: inline-block;
+            background: #ffd700;
+            color: #0b2f23;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .faq-contact a:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+        }
+
+        /* FOOTER */
+        .main-footer {
+            margin-top: 80px;
+            background: linear-gradient(135deg, #1e5d45 0%, #0b2f23 50%, #0a2619 100%);
+            color: #cdeee1;
+            border-top: 1px solid #1e5d45;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .main-footer p {
+            font-size: 0.9rem;
+            color: #7fb5a1;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .main-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 30px;
+            }
+
+            .header-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .faq-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .faq-main {
+                padding: 40px 15px;
+            }
+
+            .faq-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+
+.main-footer {
+    margin-top: 80px;
+    background: linear-gradient(135deg, #1e5d45 0%, #0b2f23 50%, #0a2619 100%);
+    color: #cdeee1;
+    border-top: 1px solid #1e5d45;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    padding: 60px 50px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-column h3.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.footer-column h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+.footer-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #b9e2d1;
+    margin-bottom: 20px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffd700;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    background: #ffd700;
+    color: #0b2f23;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b9e2d1;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ffd700;
+    padding-left: 5px;
+}
+
+.footer-contact {
+    list-style: none;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    color: #b9e2d1;
+    font-size: 0.95rem;
+}
+
+.footer-contact svg {
+    flex-shrink: 0;
+    color: #ffd700;
+}
+
+.footer-newsletter-column {
+    background: rgba(30, 93, 69, 0.3);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.newsletter-desc {
+    font-size: 0.9rem;
+    color: #b9e2d1;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.footer-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-newsletter-form input {
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid #3fc485;
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.footer-newsletter-form input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.footer-newsletter-form button {
+    padding: 12px 20px;
+    background: #ffd700;
+    border: none;
+    color: #0b2f23;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.95rem;
+}
+
+.footer-newsletter-form button:hover {
+    background: #ffed4e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+}
+
+.footer-bottom {
+    border-top: 1px solid #1e5d45;
+    padding: 25px 50px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: #7fb5a1;
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 900px) {
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .checkout-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-container {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 30px;
+    }
+
+    .checkout-main {
+        padding: 40px 15px;
+    }
+}

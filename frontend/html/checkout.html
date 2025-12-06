@@ -211,10 +211,11 @@
             <div class="footer-column footer-newsletter-column">
                 <h4>Newsletter</h4>
                 <p class="newsletter-desc">Recibe las mejores ofertas y novedades en tecnología.</p>
-                <form class="footer-newsletter-form">
-                    <input type="email" placeholder="Tu correo" required>
+                <form class="footer-newsletter-form" id="newsletterForm">
+                    <input type="email" id="correo" placeholder="Tu correo" required>
                     <button type="submit">Suscribirme</button>
                 </form>
+                <p id="mensaje"></p> <!-- Mensajes aparecerán aquí -->
             </div>
 
         </div>
@@ -228,6 +229,7 @@
     <!-- Link al JavaScript -->
     <script src="../js/checkout.js"></script>
     <script src="../js/accessibility-widget.js"></script>
+    
 
 </body>
 </html>

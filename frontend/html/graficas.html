@@ -3,163 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecnoMex - Contacto</title>
-    <link rel="stylesheet" href="../css/contacto.css">
-</head>
-<body>
+    <title>Gráficas - Panel Admin TecnoMex</title>
+    <link rel="stylesheet" href="../css/graficas.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+</head>
+
+<body>
     <!-- HEADER -->
     <header class="main-header">
-       <script src="imagenes.js"></script>
-
         <div class="header-left">
-            <img src="http://localhost:3000/uploads/logo.png" alt="Logo TecnoMex" class="logo-img">
             <a href="inicio.html" class="logo">TecnoMex</a>
+            <span class="admin-badge">GRÁFICAS</span>
         </div>
 
         <nav class="header-nav">
             <a href="inicio.html">Inicio</a>
             <a href="productos.html">Productos</a>
-            <a href="ofertas.html">Ofertas</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="FAQ.html">FAQ</a>
             <a href="admin.html">Panel Admin</a>
+            <a href="graficas.html">Gráficas</a>
         </nav>
 
         <div class="header-right">
-            <a href="login.html" class="small-link">Login</a>
-            <a href="registro.html" class="small-link">Registrarse</a>
+            <a href="inicio.html" class="btn-logout">Cerrar Sesión</a>
         </div>
     </header>
 
-    <!-- HERO CONTACTO -->
-    <section class="contact-hero">
-        <h1>¿Tienes alguna pregunta?</h1>
-        <p>Estamos aquí para ayudarte. Contáctanos y te responderemos lo antes posible.</p>
-    </section>
-
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="contact-main">
-        
-        <!-- FORMULARIO DE CONTACTO -->
-        <section class="contact-form-section">
-            <div class="form-container">
-                <h2>Envíanos un mensaje</h2>
-                <p class="form-subtitle">Completa el formulario y nos pondremos en contacto contigo pronto.</p>
+    <main class="graficas-container">
+        <div class="graficas-title">
+            <h1>Análisis y Estadísticas</h1>
+            <p>Visualiza el rendimiento de tu tienda en tiempo real</p>
+        </div>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo</label>
-                            <input type="text" id="nombre" name="nombre" required>
-                        </div>
+        <!-- NAVEGACIÓN DE GRÁFICAS -->
+        <div class="chart-nav">
+            <button onclick="mostrarCategoria()" class="btn-categoria active">
+                Ventas por Categoría
+            </button>
+            <button onclick="mostrarGenerales()" class="btn-generales">
+                Ventas Generales
+            </button>
+            <button onclick="mostrarInventario()" class="btn-inventario">
+                Inventario
+            </button>
+            <button onclick="mostrarReporte()">Reporte de Existencias</button>
+        </div>
 
-                        <div class="form-group">
-                            <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" name="telefono">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="asunto">Asunto</label>
-                        <select id="asunto" name="asunto" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="consulta">Consulta general</option>
-                            <option value="soporte">Soporte técnico</option>
-                            <option value="ventas">Información de ventas</option>
-                            <option value="devolucion">Devoluciones</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Enviar mensaje</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- INFORMACIÓN DE CONTACTO -->
-        <section class="contact-info-section">
-            <h2>Información de contacto</h2>
+        <!-- SECCIÓN: CATEGORÍA -->
+        <div id="categoriaSection" class="chart-section active">
+            <h3>Ventas por Categoría</h3>
             
-            <div class="info-cards">
-                <div class="info-card">
-                    <div class="icon-wrapper">
-                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                    </div>
-                    <h3>Dirección</h3>
-                    <p>Av. Universidad 940</p>
-                    <p>Aguascalientes, AGS 20100</p>
-                    <p>México</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Categoría Top</h4>
+                    <div class="stat-value"></div>
                 </div>
-
-                <div class="info-card">
-                    <div class="icon-wrapper">
-                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
-                        </svg>
-                    </div>
-                    <h3>Teléfono</h3>
-                    <p>+52 (449) 123-4567</p>
-                    <p>+52 (449) 765-4321</p>
-                    <p>Lun - Vie: 9:00 - 18:00</p>
+                <div class="stat-card">
+                    <h4>Total Vendido</h4>
+                    <div class="stat-value"></div>
                 </div>
-
-                <div class="info-card">
-                    <div class="icon-wrapper">
-                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                    </div>
-                    <h3>Email</h3>
-                    <p>contacto@tecnomex.com</p>
-                    <p>ventas@tecnomex.com</p>
-                    <p>soporte@tecnomex.com</p>
-                </div>
-
-                <div class="info-card">
-                    <div class="icon-wrapper">
-                        <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Redes Sociales</h3>
-                    <div class="social-links">
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">Twitter</a>
-                        <a href="#">YouTube</a>
-                    </div>
+                <div class="stat-card">
+                    <h4>Productos</h4>
+                    <div class="stat-value"></div>
                 </div>
             </div>
-        </section>
 
-        <!-- MAPA (OPCIONAL) -->
-        <section class="map-section">
-            <h2>Encuéntranos</h2>
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3701.784658307676!2d-102.29618088509308!3d21.88530778558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee8391818cdd%3A0x2a20bb3755c8ff51!2sAv.%20Universidad%2C%20Aguascalientes%2C%20Ags.!5e0!3m2!1ses!2smx!4v1234567890"
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy">
-                </iframe>
+            <div class="chart-wrapper">
+                <canvas id="graficaCategoria"></canvas>
             </div>
-        </section>
+        </div>
+
+        <!-- SECCIÓN: VENTAS GENERALES -->
+        <div id="generalesSection" class="chart-section">
+            <h3>Ventas Generales por Fecha</h3>
+
+            <div class="date-filters">
+                <label for="fechaInicio">Desde:</label>
+                <input type="date" id="fechaInicio">
+                
+                <label for="fechaFin">Hasta:</label>
+                <input type="date" id="fechaFin">
+                
+                <button id="btnFiltrar" class="btn-filtrar">Filtrar Resultados</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Ventas Totales</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Transacciones</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Ticket Promedio</h4>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="graficaGenerales"></canvas>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: INVENTARIO -->
+        <div id="inventarioSection" class="chart-section">
+            <h3>Estado del Inventario</h3>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Productos en Stock</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Stock Bajo</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Agotados</h4>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="graficaInventario"></canvas>
+            </div>
+        </div>
+        <!-- SECCIÓN: ReporteExistencias -->
+            <!-- SECCIÓN: REPORTE DE EXISTENCIAS -->
+            <div id="ReporteExistenciasSection" class="chart-section">
+                <h3>Reporte de Existencias por Categoría</h3>
+
+                <!-- Contenedor donde se insertará la tabla dinámicamente -->
+                <div id="ReporteExistencias"></div>
+            </div>
+        </div>
 
     </main>
 
@@ -167,6 +148,7 @@
     <footer class="main-footer">
         <div class="footer-content">
             
+            <!-- Columna 1: Logo y descripción -->
             <div class="footer-column">
                 <h3 class="footer-logo">TecnoMex</h3>
                 <p class="footer-desc">La mejor tienda de tecnología en México. Productos de calidad al mejor precio.</p>
@@ -194,6 +176,7 @@
                 </div>
             </div>
 
+            <!-- Columna 2: Navegación -->
             <div class="footer-column">
                 <h4>Navegación</h4>
                 <ul class="footer-links">
@@ -205,6 +188,7 @@
                 </ul>
             </div>
 
+            <!-- Columna 3: Categorías -->
             <div class="footer-column">
                 <h4>Categorías</h4>
                 <ul class="footer-links">
@@ -216,6 +200,7 @@
                 </ul>
             </div>
 
+            <!-- Columna 4: Contacto -->
             <div class="footer-column">
                 <h4>Contacto</h4>
                 <ul class="footer-contact">
@@ -240,6 +225,7 @@
                 </ul>
             </div>
 
+            <!-- Columna 5: Newsletter -->
             <div class="footer-column footer-newsletter-column">
                 <h4>Newsletter</h4>
                 <p class="newsletter-desc">Recibe las mejores ofertas y novedades en tecnología.</p>
@@ -250,20 +236,15 @@
             </div>
 
         </div>
-
+            
+        <!-- Copyright -->
         <div class="footer-bottom">
             <p>TecnoMex © 2025 — Todos los derechos reservados - Trata de un proyecto academico</p>
         </div>
     </footer>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por contactarnos! Te responderemos pronto.');
-            this.reset();
-        });
-    </script>
-    <script src="../js/accessibility-widget.js"></script>
 
+    <script src="../js/graficas.js"></script>
+    <script src="../js/accessibility-widget.js"></script>
 </body>
 </html>

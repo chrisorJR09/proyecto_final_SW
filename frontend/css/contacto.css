@@ -537,3 +537,44 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 900px) {
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .contact-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 30px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}

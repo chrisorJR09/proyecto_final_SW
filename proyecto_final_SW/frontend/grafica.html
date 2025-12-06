@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+        <!-- Header -->
+     <div  id="divH">
+        
+
+        
+     </div>
+    <canvas id="grafica" width="300" height="100"></canvas>
+
+    <button onclick="mostrarCategoria()">Categoría</button>
+    <button onclick="mostrarGenerales()">Ventas Generales</button>
+    <button onclick="mostrarInventario()">Inventario</button>
+
+    <div id="categoriaSection">
+        <h3>Ventas por Categoría</h3>
+        <canvas id="graficaCategoria"></canvas>
+    </div>
+
+    <div id="generalesSection" style="display:none;">
+        <h3>Ventas Generales por Fecha</h3>
+        <input type="date" id="fechaInicio">
+        <input type="date" id="fechaFin">
+        <button id="btnFiltrar">Filtrar</button>
+        <canvas id="graficaGenerales"></canvas>
+    </div>
+
+    <div id="inventarioSection" style="display:none;">
+        <h3>Inventario</h3>
+        <canvas id="graficaInventario"></canvas>
+    </div>
+
+    <script src="datos.js"></script>
+
+    <div id="divF">
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de APIs - Tienda</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        button { margin: 5px; padding: 10px 15px; }
+        .producto {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Probar APIs de Productos</h1>
+
+    <button onclick="getPublic()">Obtener productos públicos</button>
+    <button onclick="getOrdenPrecio()">Ordenar por precio (ASC)</button>
+
+    <br><br>
+
+    <label>Min: </label><input type="number" id="min">
+    <label>Max: </label><input type="number" id="max">
+    <button onclick="filtrarPrecio()">Filtrar por rango de precio</button>
+
+    <br><br>
+
+    <label>Categoría: </label><input type="text" id="categoria">
+    <button onclick="filtrarCategoria()">Filtrar categoría</button>
+
+    <br><br>
+
+    <button onclick="getOfertas()">Productos en oferta</button>
+
+    <hr>
+
+    <h2>Resultado:</h2>
+    <div id="resultado"></div>
+
+    <script src="tienda.js"></script>
+</body>
+</html>

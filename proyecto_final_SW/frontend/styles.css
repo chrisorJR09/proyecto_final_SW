@@ -1,0 +1,356 @@
+
+:root {
+    --primary-color: #007bff; /* Azul vibrante para botones */
+    --secondary-color: #6c757d; /* Gris para texto/bordes */
+    --background-color: #f8f9fa; /* Fondo claro */
+    --form-bg: #ffffff; /* Fondo del formulario */
+    --text-color: #343a40;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ESTILOS GENERALES Y RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html{
+    height: 100%;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+
+    /* 1. Altura completa */
+    height: 100%; 
+    
+    /* 2. Activa Flexbox en el body */
+    display: flex; 
+    
+    /* 3. Coloca los elementos (header, main, footer) en una columna */
+    flex-direction: column;
+html, body {
+  height: 100%;   /* Importante */
+  margin: 0;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+}
+
+/* --- SECCIÓN PRINCIPAL (MAIN) --- */
+main {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra las secciones horizontalmente */
+    gap: 50px; /* Espacio entre las secciones */
+
+    flex-grow: 1;
+}
+
+/* --- ESTILOS DE FORMULARIOS --- */
+
+#formLgn, #formReg, #formCon {
+    width: 100%;
+    max-width: 400px; /* Limita el ancho del formulario */
+    background-color: var(--form-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+/* Estilos de las etiquetas y campos de entrada */
+#formLgn label, #formReg label, #contactForm label{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#formLgn input[type="text"],
+#formLgn input[type="password"],
+#formReg input[type="text"],
+#formReg input[type="email"],
+#formReg input[type="password"],
+#formReg input[type="captcha"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+/* Estilos del botón */
+.formBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Captcha en Login */
+#formLgn #captchaImageL {
+    width: 100%;
+    height: 60px; /* Tamaño de ejemplo para la imagen de Captcha */
+    background-color: var(--background-color);
+    border: 1px dashed var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+/* Enlace de registro */
+.unregistered {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.unregistered p {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+}
+
+.unregistered a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- SECCIÓN NOSOTROS (usPfl) --- */
+
+#nosotros {
+
+    width: 100%;
+    padding: 20px 0 40px 0; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: space-around;
+    
+}
+
+#nosotros h2 {
+    
+    margin-bottom: 30px;
+}
+
+.usPfl {
+    display: flex;
+    flex-wrap: wrap; 
+    
+   
+    justify-content: center; 
+    
+    gap: 100px; 
+    
+    width: 100%;
+   
+}
+
+.usImgs {
+    background-color: var(--form-bg);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px; 
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.usImgs h2 {
+    font-size: 1.2em;
+    color: var(--text-color);
+    border-bottom: none;
+    margin-bottom: 10px;
+}
+
+.usImgs img {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%; 
+    object-fit: cover;
+    background-color: var(--background-color); 
+    border: 3px solid var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/*  HEADER Y FOOTER */
+
+#divH, #divF {
+    width: 100%;
+    background-color: var(--text-color);
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    
+}
+
+#navegadero{
+    display: flex;
+    flex-direction: row;
+    justify-content: center ;
+    justify-content: space-between;
+}
+
+
+
+@media (max-width: 450px) {
+    #formLgn, #formReg {
+        margin: 0 10px;
+        padding: 20px;
+    }
+}
+
+#navegadero h2 {
+    color: var(--accent-color);
+    font-size: var(--logo-font);
+    margin: 0;
+    font-weight: bold;
+    flex-shrink: 0; 
+}
+
+/* NAVEGACIÓN  */ 
+#mH {
+    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    padding-left: var(--padding-sides);
+    padding-right: var(--padding-sides);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center; 
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links li a:hover {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* BOTONES DE LOGIN/REGISTRO (Derecha) */
+#logs {
+    
+    display: flex;
+    gap: 10px;
+    margin-left: auto; 
+    flex-shrink: 0; 
+}
+
+.enters {
+    background-color: var(--button-bg);
+    color: var(--header-bg); 
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.enters:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-1px);
+}
+
+
+#contactSection {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 40px 20px;
+}
+
+#contactSection h2 {
+    color: var(--primary-color); 
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+
+#contactForm {
+    width: 100%;
+    max-width: 500px; 
+    padding: 20px;
+    background-color: var(--bg-form); 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* CONTACTO */
+
+#contactForm label {
+    display: block; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da; 
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: var(--input-bg); 
+}
+
+#contactForm textarea {
+    resize: vertical; 
+}
+
+/* Clases para Aparecer y desaparecer */
+.inactivo {
+    display: none;
+}
+
+.inactivo.activo{
+    display: flex;
+}
+
+
+
+}
+
+
+

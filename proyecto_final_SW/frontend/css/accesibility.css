@@ -1,0 +1,390 @@
+/* ========================================
+   ESTILOS DE ACCESIBILIDAD
+   Archivo: css/accessibility.css
+   ======================================== */
+
+/* Variables para modo oscuro */
+body.dark-mode {
+    background: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .main-header {
+    background: #2d2d2d !important;
+    border-bottom-color: #444 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .logo {
+    color: #ffd700 !important;
+}
+
+body.dark-mode .header-nav a,
+body.dark-mode .small-link {
+    color: #b0b0b0 !important;
+}
+
+body.dark-mode .header-nav a:hover,
+body.dark-mode .small-link:hover {
+    color: #ffd700 !important;
+}
+
+body.dark-mode .checkout-hero,
+body.dark-mode .hero-section {
+    background: linear-gradient(135deg, #0a1f17 0%, #0d2b1f 100%) !important;
+}
+
+body.dark-mode .checkout-main,
+body.dark-mode .content-section {
+    background: transparent !important;
+}
+
+body.dark-mode .form-container,
+body.dark-mode .card,
+body.dark-mode .resumen {
+    background: #2d2d2d !important;
+    border-color: #555 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: #ffd700 !important;
+}
+
+body.dark-mode label,
+body.dark-mode p {
+    color: #b0b0b0 !important;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="tel"],
+body.dark-mode input[type="file"],
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #3a3a3a !important;
+    border-color: #555 !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="email"]:focus,
+body.dark-mode input[type="tel"]:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+    border-color: #ffd700 !important;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2) !important;
+}
+
+body.dark-mode .metodos label {
+    background: #3a3a3a !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .metodos label:hover {
+    border-color: #ffd700 !important;
+    background: #444 !important;
+}
+
+body.dark-mode #extra-pago {
+    background: #2d2d2d !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .datos-bancarios,
+body.dark-mode .info-oxxo,
+body.dark-mode .tarjetas-aceptadas {
+    background: #3a3a3a !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .instrucciones-transferencia,
+body.dark-mode .instrucciones-oxxo {
+    background: #2a3a3f !important;
+    border-color: #3a5a5f !important;
+}
+
+body.dark-mode .aviso-transferencia,
+body.dark-mode .aviso-oxxo {
+    background: #3a3020 !important;
+    border-left-color: #f59e0b !important;
+}
+
+body.dark-mode .main-footer {
+    background: linear-gradient(135deg, #0d2b1f 0%, #0a1f17 100%) !important;
+}
+
+body.dark-mode button[type="submit"],
+body.dark-mode .btn {
+    background: #ffd700 !important;
+    color: #0b2f23 !important;
+}
+
+body.dark-mode button[type="submit"]:hover,
+body.dark-mode .btn:hover {
+    background: #ffed4e !important;
+}
+
+/* ========================================
+   WIDGET DE ACCESIBILIDAD
+   ======================================== */
+
+.accessibility-widget {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+}
+
+.accessibility-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #0b2f23;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: all 0.3s;
+}
+
+.accessibility-button:hover {
+    background: #1a4d3a;
+    transform: scale(1.1);
+}
+
+body.dark-mode .accessibility-button {
+    background: #ffd700;
+    color: #0b2f23;
+}
+
+.accessibility-panel {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    padding: 25px;
+    width: 320px;
+    display: none;
+    animation: slideUp 0.3s ease;
+}
+
+body.dark-mode .accessibility-panel {
+    background: #2d2d2d;
+    border: 1px solid #444;
+}
+
+.accessibility-panel.active {
+    display: block;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.accessibility-panel h3 {
+    font-size: 1.3rem;
+    color: #0b2f23 !important;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+body.dark-mode .accessibility-panel h3 {
+    color: #ffd700 !important;
+}
+
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+body.dark-mode .accessibility-option {
+    border-bottom-color: #444;
+}
+
+.accessibility-option:last-child {
+    border-bottom: none;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: #444 !important;
+}
+
+body.dark-mode .option-label {
+    color: #b0b0b0 !important;
+}
+
+.option-label span {
+    font-size: 20px;
+}
+
+.option-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.control-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #0b2f23;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #0b2f23;
+    transition: all 0.2s;
+}
+
+body.dark-mode .control-btn {
+    background: #3a3a3a;
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+.control-btn:hover {
+    background: #0b2f23;
+    color: white;
+}
+
+body.dark-mode .control-btn:hover {
+    background: #ffd700;
+    color: #0b2f23;
+}
+
+.control-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: #ddd;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.toggle-switch.active {
+    background: #0b2f23;
+}
+
+body.dark-mode .toggle-switch.active {
+    background: #ffd700;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s;
+}
+
+.toggle-switch.active::after {
+    transform: translateX(24px);
+}
+
+.font-size-indicator {
+    font-size: 0.85rem;
+    color: #0b2f23 !important;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+
+body.dark-mode .font-size-indicator {
+    color: #ffd700 !important;
+}
+
+.reset-btn {
+    width: 100%;
+    margin: 10px 0 0 0 !important;
+    padding: 12px 20px !important;
+    background: #0b2f23 !important;
+    color: white !important;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover {
+    background: #1a4d3a !important;
+    transform: translateY(-2px);
+}
+
+body.dark-mode .reset-btn {
+    background: #ffd700 !important;
+    color: #0b2f23 !important;
+}
+
+body.dark-mode .reset-btn:hover {
+    background: #ffed4e !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .accessibility-widget {
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .accessibility-button {
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+    }
+
+    .accessibility-panel {
+        width: 280px;
+        right: -10px;
+        padding: 20px;
+    }
+
+    .accessibility-panel h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-panel {
+        width: 260px;
+    }
+}

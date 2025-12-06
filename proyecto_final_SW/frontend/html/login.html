@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Formulario de Login -->
+        <section id="formLgn" class="inactivo">
+            <div>
+                <form >
+                    <h2>Login</h2>
+                    <label for="username">Usuario</label>
+                    <input type="text" id="usernameL" name="username" required>
+
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="passwordL" id="passwordL" required>
+
+                    <label for="captcha">Captcha</label>
+                    <div class="captcha-img">
+                       <img id="captchaImage" alt="CAPTCHA" />
+                    </div>
+
+                    <input type="text" name="captcha" id="captchaL">
+
+                    <div class="unregistered">
+                        <p>No tienes cuenta?</p>
+                        <a href="newUser.html" id="regBtn">Registrarse</a>
+                    </div>
+
+                    <div class="unregistered">
+                        <p>¿Olvidaste tu contraseña?</p>
+                        <a href="restablecePassword.html" id="regBtn" target="_blank">Restablece tu contraseña</a>
+                    </div>
+
+                   <button type="submit" class="formBtn" onclick="iniciarSesion(event)">Aceptar</button>
+                    <button onclick="recargarCaptcha()" style="background:#6c757d">Recargar CAPTCHA</button>
+                    <p id="mensaje"></p>
+                </form>
+            </div>
+        </section>
+        <script src="../js/accessibility-widget.js"></script>
+        <script src="../js/login.js"></script>
+</body>
+</html>

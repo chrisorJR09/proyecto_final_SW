@@ -1,0 +1,68 @@
+const msg = document.getElementById('msg');
+
+// Extraer token de la URL
+const params = new URLSearchParams(window.location.search);
+const token = params.get("token");
+
+if (!token) {
+    msg.textContent = "Token no válido o faltante.";
+    throw new Error("Token faltante");
+}
+
+// 1️⃣ Validar token con el backend
+async function validarToken() {
+    const res = await fetch(`https://proyectofinalsw.onrender.com/sesion/resetPassword/${token}`);
+    const data = await res.json();
+
+    if (!res.ok) {
+        msg.textContent = data.message;
+        document.getElementById("passwordForm").style.display = "none";
+    } else {
+        msg.textContent = "Token válido. Ingresa tu nueva contraseña.";
+    }
+}
+
+validarToken();
+
+// 2️⃣ Enviar nueva contraseña
+const form = document.getElementById('passwordForm');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nvoPassword = document.getElementById('password').value;
+
+    const res = await fetch("https://proyectofinalsw.onrender.com/sesion/setNewPassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, nvoPassword })
+    });
+
+    const data = await res.json();
+    msg.textContent = data.message || data.error;
+
+    if (res.ok) {
+        msg.style.color = "lightgreen";
+
+        // Crear enlace
+        const link = document.createElement("a");
+        link.href = "login.html";
+        link.textContent = "Volver al inicio de sesión";
+        link.style.display = "block";
+        link.style.marginTop = "10px";
+        link.style.color = "#ffd700";
+        link.style.fontWeight = "600";
+        link.style.textDecoration = "none";
+
+        link.addEventListener("mouseover", () => {
+            link.style.textDecoration = "underline";
+        });
+        link.addEventListener("mouseout", () => {
+            link.style.textDecoration = "none";
+        });
+
+        // Agregar al HTML debajo del mensaje
+        msg.appendChild(link);
+    }
+    
+});

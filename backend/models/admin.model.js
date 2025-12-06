@@ -1,51 +1,52 @@
 // models/admin.model.js
 
-const pool = require('../db_conection/conexion');
+const db = require("../db_conection/conexion.js");
 
-// Obtener todos los productos
-async function getProducto() {
-    const [rows] = await pool.query('SELECT * FROM productos');
-    return rows;
+class ProductoModel {
+    static async getProductos() {
+        const [rows] = await db.execute("SELECT * FROM productos");
+        return rows;
+    }
+
+    static async getProductoById(id) {
+        const [rows] = await db.execute("SELECT * FROM productos WHERE id = ?", [id]);
+        return rows[0];
+    }
+
+    static async createProducto({ categoria, nombre, precio, oferta, descripcion, stock, imagen }) {
+        const [result] = await db.execute(
+            `INSERT INTO productos (categoria, nombre, precio, oferta, descripcion, stock, imagen) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [categoria, nombre, precio, oferta, descripcion, stock, imagen]
+        );
+        return result.insertId;
+    }
+
+    static async updateProducto(id, { categoria, nombre, precio, oferta, descripcion, stock, imagen }) {
+        const [result] = await db.execute(
+            `UPDATE productos 
+             SET categoria=?, nombre=?, precio=?, oferta=?, descripcion=?, stock=?, imagen=? 
+             WHERE id=?`,
+            [categoria, nombre, precio, oferta, descripcion, stock, imagen, id]
+        );
+        return result.affectedRows;
+    }
+
+    static async deleteProducto(id) {
+        const [result] = await db.execute(
+            "DELETE FROM productos WHERE id=?",
+            [id]
+        );
+        return result.affectedRows;
+    }
+
+    static async updateStock(id, nuevoStock) {
+        const [result] = await db.execute(
+            "UPDATE productos SET stock=? WHERE id=?",
+            [nuevoStock, id]
+        );
+        return result.affectedRows;
+    }
 }
 
-// Insertar un nuevo producto
-async function postProducto(categoria, nombre, precio, descripcion, stock, imagen) {
-    const [result] = await pool.query(
-        'INSERT INTO productos (categoria, nombre, precio, descripcion, stock, imagen) VALUES (?, ?, ?, ?, ?, ?)',
-        [categoria, nombre, precio, descripcion, stock, imagen]
-    );
-    return result.insertId;
-}
-
-// Actualizar un producto existente
-async function putProducto(id, categoria, nombre, precio, descripcion, stock, imagen) {
-    const [result] = await pool.query(
-        'UPDATE productos SET categoria = ?, nombre = ?, precio = ?, descripcion = ?, stock = ?, imagen = ? WHERE id = ?',
-        [categoria, nombre, precio, descripcion, stock, imagen, id]
-    );
-    return result.affectedRows;
-}
-
-// Eliminar un producto
-async function deleteProducto(id) {
-    const [result] = await pool.query('DELETE FROM productos WHERE id = ?', [id]);
-    return result.affectedRows;
-}
-
-// Cambiar stock de un producto
-async function postCambiarStock(id, nuevoStock) {
-    const [result] = await pool.query(
-        'UPDATE productos SET stock = ? WHERE id = ?',
-        [nuevoStock, id]
-    );
-    return result.affectedRows;
-}
-
-
-module.exports = {
-    getProducto,
-    postProducto,
-    putProducto,
-    deleteProducto,
-    postCambiarStock
-};
+module.exports = ProductoModel;

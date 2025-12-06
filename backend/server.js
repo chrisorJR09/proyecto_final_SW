@@ -26,7 +26,6 @@ app.use(express.json());
 
 
 
-
 //Ruta en raíz, para probar el funcionamiento del API
 app.get("/", (req, res)=>{
     console.log("Servidor funcionando correctamente");
@@ -47,6 +46,12 @@ app.use('/api/ventas_generales', VentasGeneralesRoutes);
 
 const InventarioGraficaRoutes = require('./routes/InventarioGraficaRoutes');
 app.use('/api/inventario_grafica', InventarioGraficaRoutes);
+
+const adminRoutes = require('./routes/admin.route');
+app.use('/api/administrador', adminRoutes);
+
+const funcionesTienda = require('./routes/tienda.route');
+app.use('/api/tienda', funcionesTienda);
 
 
 // Para poder acceder a las imágenes desde el front

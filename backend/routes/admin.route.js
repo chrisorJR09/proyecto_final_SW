@@ -3,6 +3,9 @@
 const express = require('express');
 const router = express.Router();
 
+// Importar middleware
+const authAdmin = require("../admin.middleware.js");
+
 const {
     getProducto,
     postProducto,
@@ -11,10 +14,13 @@ const {
     postCambiarStock
 } = require("../controllers/admin.controller.js");
 
-router.get('/', getProducto);
-router.post('/', postProducto);
-router.put('/:id', putProducto);
-router.delete('/:id', deleteProducto);
-router.post('/cambiarStock/:id', postCambiarStock);
+// PROTEGER TODAS LAS RUTAS DE ADMIN
+router.use(authAdmin);
+
+router.get('/', authAdmin, getProducto);
+router.post('/', authAdmin, postProducto);
+router.put('/:id', authAdmin, putProducto);
+router.delete('/:id', authAdmin, deleteProducto);
+router.post('/cambiarStock/:id', authAdmin, postCambiarStock);
 
 module.exports = router;

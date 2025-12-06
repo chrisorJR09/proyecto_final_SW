@@ -10,13 +10,9 @@ const cors = require("cors");
 
 const pool = require('./db_conection/conexion'); // <-- Importamos la conexión
 
-
-
 const app=express();
 
 app.use(cors());
-
-
 
 //configuración de arranque del servidor
 const PORT = process.env.PORT || 3000;
@@ -53,6 +49,12 @@ app.use('/api/administrador', adminRoutes);
 const funcionesTienda = require('./routes/tienda.route');
 app.use('/api/tienda', funcionesTienda);
 
+const ventasRoutes = require('./routes/ventasRoutes');
+app.use('/api/ventas', ventasRoutes);
+
+
+const ticketRoutes = require("./routes/ticketRoutes");
+app.use("/api/ticket", ticketRoutes);
 
 // Para poder acceder a las imágenes desde el front
 app.use('/uploads', express.static('uploads'));
@@ -71,3 +73,4 @@ async function testConnection() {
 app.listen(PORT, ()=>{
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 })
+

@@ -571,3 +571,462 @@ button[type="submit"]:hover {
         padding: 40px 15px;
     }
 }
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 900px) {
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 30px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .contact-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 30px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===========================
+   ESTILOS ADICIONALES PARA MÉTODOS DE PAGO
+   Agregar al final de checkout.css
+   =========================== */
+
+/* Actualizar el estilo existente de #extra-pago */
+#extra-pago {
+    margin-top: 20px;
+    padding: 25px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+/* ========== TARJETA DE CRÉDITO/DÉBITO ========== */
+.formulario-tarjeta h3 {
+    color: #0b2f23;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.formulario-tarjeta label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #0b2f23;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.formulario-tarjeta input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background: white;
+    font-family: inherit;
+}
+
+.formulario-tarjeta input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.15);
+}
+
+.fila-tarjeta {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    margin-top: 0;
+}
+
+.fila-tarjeta > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjetas-aceptadas {
+    margin-top: 25px;
+    padding: 18px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.tarjetas-aceptadas span {
+    font-weight: 600;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.tarjetas-aceptadas img {
+    height: 22px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.tarjetas-aceptadas img:hover {
+    opacity: 1;
+}
+
+/* ========== TRANSFERENCIA BANCARIA ========== */
+.formulario-transferencia h3 {
+    color: #0b2f23;
+    margin-bottom: 25px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.datos-bancarios {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 4px solid #0b2f23;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.datos-bancarios p {
+    margin: 12px 0;
+    color: #374151;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.datos-bancarios strong {
+    color: #0b2f23;
+    display: inline-block;
+    width: 130px;
+    font-weight: 700;
+}
+
+.instrucciones-transferencia {
+    background: #eff6ff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #bae6fd;
+}
+
+.instrucciones-transferencia h4 {
+    color: #1e40af;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.instrucciones-transferencia ol {
+    margin: 0;
+    padding-left: 25px;
+    color: #374151;
+}
+
+.instrucciones-transferencia li {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.formulario-transferencia label {
+    display: block;
+    margin: 20px 0 10px;
+    color: #0b2f23;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.formulario-transferencia input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.formulario-transferencia input[type="file"]:hover {
+    border-color: #ffd700;
+    background: #fffef8;
+}
+
+.aviso-transferencia {
+    margin-top: 25px;
+    padding: 16px 20px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* ========== PAGO EN OXXO ========== */
+.formulario-oxxo h3 {
+    color: #0b2f23;
+    margin-bottom: 25px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.info-oxxo {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 3px solid #EC0000;
+    box-shadow: 0 4px 12px rgba(236, 0, 0, 0.1);
+}
+
+.logo-oxxo {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-oxxo svg {
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+}
+
+.monto-pagar {
+    margin: 20px 0;
+}
+
+.monto-pagar p {
+    color: #6b7280;
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.monto-pagar h2 {
+    color: #EC0000;
+    margin: 10px 0 25px;
+    font-size: 2.2em;
+    font-weight: 700;
+    border: none;
+    padding: 0;
+}
+
+.referencia-oxxo {
+    background: #f9fafb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    border: 2px dashed #d1d5db;
+}
+
+.referencia-oxxo p {
+    margin: 8px 0;
+    color: #374151;
+    font-weight: 500;
+}
+
+.referencia-oxxo p:first-child {
+    font-size: 14px;
+}
+
+.codigo-referencia {
+    font-family: 'Courier New', monospace;
+    font-size: 22px;
+    font-weight: bold;
+    color: #EC0000;
+    letter-spacing: 3px;
+    margin-top: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.instrucciones-oxxo {
+    background: #fef2f2;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid #fecaca;
+}
+
+.instrucciones-oxxo h4 {
+    color: #DC2626;
+    margin-bottom: 18px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.instrucciones-oxxo ol {
+    margin: 0;
+    padding-left: 25px;
+    color: #374151;
+}
+
+.instrucciones-oxxo li {
+    margin: 12px 0;
+    line-height: 1.7;
+}
+
+.aviso-oxxo {
+    padding: 16px 20px;
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* ========== RESUMEN DE COMPRA ========== */
+.resumen {
+    position: sticky;
+    top: 100px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e8e8e8;
+    margin-top: 30px;
+}
+
+.resumen h2 {
+    font-size: 1.5rem;
+    color: #0b2f23;
+    margin: 0 0 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ffd700;
+}
+
+.resumen p {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.resumen hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 20px 0;
+}
+
+.resumen p strong {
+    color: #0b2f23;
+    font-size: 1.2rem;
+}
+
+.resumen span {
+    font-weight: 600;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .fila-tarjeta {
+        grid-template-columns: 1fr;
+    }
+    
+    .tarjetas-aceptadas {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .datos-bancarios strong {
+        display: block;
+        width: auto;
+        margin-bottom: 5px;
+    }
+    
+    .monto-pagar h2 {
+        font-size: 1.8em;
+    }
+    
+    .codigo-referencia {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+    
+    .info-oxxo {
+        padding: 20px;
+    }
+    
+    .resumen {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    #extra-pago {
+        padding: 20px 15px;
+    }
+    
+    .formulario-tarjeta h3,
+    .formulario-transferencia h3,
+    .formulario-oxxo h3 {
+        font-size: 1.1em;
+    }
+    
+    .datos-bancarios,
+    .instrucciones-transferencia,
+    .instrucciones-oxxo {
+        padding: 18px;
+    }
+    
+    .codigo-referencia {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}
+
+/* Mostrar/ocultar resumen según pantalla */
+@media (min-width: 769px) {
+    .resumen-mobile {
+        display: none !important;
+    }
+    
+    .resumen-desktop {
+        display: block !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .resumen-mobile {
+        display: block !important;
+    }
+    
+    .resumen-desktop {
+        display: none !important;
+    }
+}

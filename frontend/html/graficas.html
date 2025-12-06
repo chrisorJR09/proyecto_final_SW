@@ -3,130 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra - TecnoMex</title>
-    <link rel="stylesheet" href="../css/checkout.css">
+    <title>Gráficas - Panel Admin TecnoMex</title>
+    <link rel="stylesheet" href="../css/graficas.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
 <body>
     <!-- HEADER -->
     <header class="main-header">
         <div class="header-left">
-            <img src="http://localhost:3000/uploads/logo.png" alt="Logo TecnoMex" class="logo-img">
             <a href="inicio.html" class="logo">TecnoMex</a>
+            <span class="admin-badge">GRÁFICAS</span>
         </div>
+
         <nav class="header-nav">
             <a href="inicio.html">Inicio</a>
             <a href="productos.html">Productos</a>
-            <a href="ofertas.html">Ofertas</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="FAQ.html">FAQ</a>
+            <a href="admin.html">Panel Admin</a>
+            <a href="graficas.html">Gráficas</a>
         </nav>
 
-        <div class="header-right" id="headerUserArea">
         <div class="header-right">
-            <a href="login.html" class="small-link">Login</a>
-            <a href="registro.html" class="small-link">Registrarse</a>
+            <a href="inicio.html" class="btn-logout">Cerrar Sesión</a>
         </div>
     </header>
 
-    <!-- HERO CHECKOUT -->
-    <section class="checkout-hero">
-        <h1>Finalizar Compra</h1>
-        <p>Completa tus datos para procesar tu pedido</p>
-    </section>
-
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="checkout-main">
-        <div style="display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1200px; margin: 0 auto;">
-            
-            <!-- FORMULARIO -->
-            <div class="form-container">
-                <form id="checkout-form">
-                    
-                    <h2>Datos de Envío</h2>
-
-                    <label>Nombre Completo</label>
-                    <input type="text" id="nombre" required placeholder="Juan Pérez González">
-
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="email" required placeholder="correo@ejemplo.com">
-
-                    <label>Teléfono</label>
-                    <input type="text" id="telefono" required placeholder="449 123 4567">
-
-                    <label>Dirección</label>
-                    <input type="text" id="direccion" required placeholder="Calle, número, colonia">
-
-                    <label>Ciudad</label>
-                    <input type="text" id="ciudad" required placeholder="Aguascalientes">
-
-                    <label>Código Postal</label>
-                    <input type="text" id="codigo_postal" required placeholder="20000" maxlength="5">
-
-                    <label>País</label>
-                    <select id="pais" required>
-                        <option value="">Selecciona un país</option>
-                        <option value="MX" selected>México</option>
-                        <option value="US">Estados Unidos</option>
-                        <option value="ES">España</option>
-                    </select>
-
-                    <h2>Método de Pago</h2>
-
-                    <div class="metodos">
-                        <label>
-                            <input type="radio" name="pago" value="tarjeta" required>
-                            Tarjeta de crédito/débito
-                        </label>
-
-                        <label>
-                            <input type="radio" name="pago" value="transferencia">
-                            Transferencia Bancaria
-                        </label>
-
-                        <label>
-                            <input type="radio" name="pago" value="oxxo">
-                            Pago en OXXO
-                        </label>
-                    </div>
-
-                    <div id="extra-pago"></div>
-
-                    <!-- RESUMEN MOBILE (se muestra solo en pantallas pequeñas) -->
-                    <div class="resumen resumen-mobile" style="display: none;">
-                        <h2>Resumen de Compra</h2>
-                        <p>Subtotal: <span id="subtotal-mobile">$0.00</span></p>
-                        <p>Impuesto: <span id="impuesto-mobile">$0.00</span></p>
-                        <p>Envío: <span id="envio-mobile">$0.00</span></p>
-                        <hr>
-                        <p><strong>Total: <span id="total-mobile">$0.00</span></strong></p>
-                    </div>
-
-                    <button type="submit">Procesar Pago</button>
-                </form>
-
-                <!-- Pantalla de Procesamiento -->
-                <div id="procesando" class="oculto">
-                    <div class="loader"></div>
-                    <p>Procesando pago...</p>
-                </div>
-
-                <!-- Resultado Final -->
-                <div id="resultado" class="oculto"></div>
-            </div>
-
-            <!-- RESUMEN DESKTOP (se muestra solo en pantallas grandes) -->
-            <div class="resumen resumen-desktop">
-                <h2>Resumen de Compra</h2>
-                <p>Subtotal: <span id="subtotal">$0.00</span></p>
-                <p>Impuesto: <span id="impuesto">$0.00</span></p>
-                <p>Envío: <span id="envio">$0.00</span></p>
-                <hr>
-                <p><strong>Total: <span id="total">$0.00</span></strong></p>
-            </div>
-
+    <main class="graficas-container">
+        <div class="graficas-title">
+            <h1>Análisis y Estadísticas</h1>
+            <p>Visualiza el rendimiento de tu tienda en tiempo real</p>
         </div>
+
+        <!-- NAVEGACIÓN DE GRÁFICAS -->
+        <div class="chart-nav">
+            <button onclick="mostrarCategoria()" class="btn-categoria active">
+                Ventas por Categoría
+            </button>
+            <button onclick="mostrarGenerales()" class="btn-generales">
+                Ventas Generales
+            </button>
+            <button onclick="mostrarInventario()" class="btn-inventario">
+                Inventario
+            </button>
+            <button onclick="mostrarReporte()">Reporte de Existencias</button>
+        </div>
+
+        <!-- SECCIÓN: CATEGORÍA -->
+        <div id="categoriaSection" class="chart-section active">
+            <h3>Ventas por Categoría</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Categoría Top</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Vendido</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Productos</h4>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="graficaCategoria"></canvas>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: VENTAS GENERALES -->
+        <div id="generalesSection" class="chart-section">
+            <h3>Ventas Generales por Fecha</h3>
+
+            <div class="date-filters">
+                <label for="fechaInicio">Desde:</label>
+                <input type="date" id="fechaInicio">
+                
+                <label for="fechaFin">Hasta:</label>
+                <input type="date" id="fechaFin">
+                
+                <button id="btnFiltrar" class="btn-filtrar">Filtrar Resultados</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Ventas Totales</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Transacciones</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Ticket Promedio</h4>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="graficaGenerales"></canvas>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: INVENTARIO -->
+        <div id="inventarioSection" class="chart-section">
+            <h3>Estado del Inventario</h3>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Productos en Stock</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Stock Bajo</h4>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="stat-card">
+                    <h4>Agotados</h4>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <canvas id="graficaInventario"></canvas>
+            </div>
+        </div>
+        <!-- SECCIÓN: ReporteExistencias -->
+            <!-- SECCIÓN: REPORTE DE EXISTENCIAS -->
+            <div id="ReporteExistenciasSection" class="chart-section">
+                <h3>Reporte de Existencias por Categoría</h3>
+
+                <!-- Contenedor donde se insertará la tabla dinámicamente -->
+                <div id="ReporteExistencias"></div>
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -180,7 +195,8 @@
                     <li><a href="#">Laptops</a></li>
                     <li><a href="#">Celulares</a></li>
                     <li><a href="#">Tablets</a></li>
-                    <li><a href="#">Todos los Productos</a></li>
+                    <li><a href="#">Todo los Productos</a></li>
+                    
                 </ul>
             </div>
 
@@ -223,14 +239,12 @@
             
         <!-- Copyright -->
         <div class="footer-bottom">
-            <p>TecnoMex © 2025 — Todos los derechos reservados - Trata de un proyecto académico</p>
+            <p>TecnoMex © 2025 — Todos los derechos reservados - Trata de un proyecto academico</p>
         </div>
     </footer>
 
-    <!-- Link al JavaScript -->
-    <script src="../js/checkout.js"></script>
-    <script src="../js/header.js"></script>
-    <script src="../js/accessibility-widget.js"></script>
 
+    <script src="../js/graficas.js"></script>
+    <script src="../js/accessibility-widget.js"></script>
 </body>
 </html>

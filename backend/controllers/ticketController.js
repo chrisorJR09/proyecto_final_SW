@@ -15,25 +15,29 @@ const generarTicket = (req, res) => {
         metodo, 
         productos,
         cupon = null,
-        envio = 0
+        subtotal,  // ✅ Recibir desde el frontend
+        impuesto,  // ✅ Monto del impuesto ya calculado
+        impuesto_porcentaje = 16,  // ✅ Solo para mostrar el %
+        envio = 0,  // ✅ Costo de envío del frontend
+        total,  // ✅ Total ya calculado
+        metodo_envio = "Envío estándar",
+        empleado = "Sistema", 
+        id_venta = Date.now()
     } = req.body;
 
-    // Calcular subtotal
-    const subtotal = productos.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+    // Calcular total de unidades
+    const totalUnidades = productos.reduce((sum, p) => sum + p.cantidad, 0);
 
-    // IVA (16%)
-    const iva = subtotal * 0.16;
-
-    // Descuento por cupón (si existe)
+    // Cupón (si aplica)
     let descuentoCupon = 0;
     if (cupon && cupon.descuento) {
         descuentoCupon = subtotal * (cupon.descuento / 100);
     }
 
-    // Total final
-    const totalFinal = subtotal + iva - descuentoCupon + envio;
+    // Total final (usar el que viene del frontend si no hay cupón)
+    const totalFinal = total || (subtotal + impuesto - descuentoCupon + envio);
 
-    // Fecha y hora actual
+    // Fecha y hora
     const fechaActual = new Date();
     const fecha = fechaActual.toLocaleDateString('es-MX', {
         year: 'numeric',
@@ -45,36 +49,32 @@ const generarTicket = (req, res) => {
         minute: '2-digit'
     });
 
-    // Configurar cabeceras
+    // PDF
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", `attachment; filename=ticket_${Date.now()}.pdf`);
+    res.setHeader("Content-Disposition", `attachment; filename=ticket_${id_venta}.pdf`);
 
-    // --- ESTILO TICKET ---
     const doc = new PDFDocument({
-        size: [300, 700], // tamaño tipo recibo
+        size: [300, 700],
         margins: { top: 20, bottom: 20, left: 20, right: 20 }
     });
 
     doc.pipe(res);
 
-    // --- LOGO (si existe) ---
+    // LOGO
     const logoPath = path.join(__dirname, "../uploads/logo.png");
     try {
-        doc.image(logoPath, 110, 20, { width: 80 }); // Logo centrado
+        doc.image(logoPath, 110, 20, { width: 80 });
         doc.moveDown(5);
-    } catch (error) {
-        console.log("Logo no encontrado, continuando sin él");
+    } catch {
         doc.moveDown(1);
     }
 
-    // --- ENCABEZADO DE LA EMPRESA ---
+    // EMPRESA
     doc
         .fontSize(20)
         .fillColor("#0b2f23")
         .font("Helvetica-Bold")
         .text("TecnoMex", { align: "center" });
-
-    doc.moveDown(0.3);
 
     doc
         .fontSize(10)
@@ -84,26 +84,29 @@ const generarTicket = (req, res) => {
 
     doc.moveDown(0.5);
 
-    // --- TICKET DE COMPRA ---
+    // TITULO
     doc
         .fontSize(16)
         .fillColor("#ffd700")
         .font("Helvetica-Bold")
         .text("TICKET DE COMPRA", { align: "center" });
 
-    doc.moveDown(0.5);
-
-    // --- FECHA Y HORA ---
     doc
         .fontSize(9)
         .fillColor("#444")
         .font("Helvetica")
+        .text(`Venta No.: ${id_venta}`, { align: "center" });
+
+    doc.moveDown(0.3);
+
+    // FECHA
+    doc
         .text(`Fecha: ${fecha}`, { align: "center" })
         .text(`Hora: ${hora}`, { align: "center" });
 
-    doc.moveDown(0.8);
+    doc.moveDown(1);
 
-    // Línea decorativa
+    // LINEA
     doc
         .moveTo(20, doc.y)
         .lineTo(280, doc.y)
@@ -113,14 +116,12 @@ const generarTicket = (req, res) => {
 
     doc.moveDown(1);
 
-    // --- DATOS CLIENTE ---
+    // CLIENTE
     doc
         .fontSize(11)
         .fillColor("#0b2f23")
         .font("Helvetica-Bold")
         .text("DATOS DEL CLIENTE", { underline: true });
-
-    doc.moveDown(0.5);
 
     doc
         .fontSize(10)
@@ -133,11 +134,21 @@ const generarTicket = (req, res) => {
         .text(`Ciudad: ${ciudad}`)
         .text(`Código Postal: ${codigo_postal}`)
         .text(`País: ${pais}`)
-        .text(`Método de pago: ${metodo.toUpperCase()}`);
+        .text(`Método de pago: ${metodo.toUpperCase()}`)
+        .text(`Método de envío: ${metodo_envio}`);
 
     doc.moveDown(1);
 
-    // Línea separadora
+    // EMPLEADO
+    doc
+        .fontSize(10)
+        .fillColor("#0b2f23")
+        .font("Helvetica-Bold")
+        .text(`Atendido por: ${empleado}`);
+
+    doc.moveDown(1);
+
+    // LINEA
     doc
         .moveTo(20, doc.y)
         .lineTo(280, doc.y)
@@ -148,132 +159,82 @@ const generarTicket = (req, res) => {
 
     doc.moveDown(1);
 
-    // --- PRODUCTOS ---
+    // PRODUCTOS
     doc
         .fontSize(11)
         .fillColor("#0b2f23")
         .font("Helvetica-Bold")
         .text("PRODUCTOS", { underline: true });
 
-    doc.moveDown(0.5);
-
     productos.forEach((p) => {
         const precioTotal = p.precio * p.cantidad;
-        
+
         doc
             .fontSize(10)
             .fillColor("black")
             .font("Helvetica")
-            .text(`${p.nombre}`, 20, doc.y, { continued: false });
-        
+            .text(`${p.nombre}`);
+
         doc
             .fontSize(9)
             .fillColor("#666")
-            .text(`  ${p.cantidad} x $${p.precio.toFixed(2)}`, 20, doc.y)
+            .text(`${p.cantidad} x $${p.precio.toFixed(2)}`);
+
+        doc
             .fontSize(10)
             .fillColor("black")
-            .text(`$${precioTotal.toFixed(2)}`, 220, doc.y - 10, { width: 60, align: "right" });
-        
-        doc.moveDown(0.3);
+            .text(`$${precioTotal.toFixed(2)}`, { align: "right" });
+
+        doc.moveDown(0.5);
     });
-
-    doc.moveDown(0.5);
-
-    // Línea separadora
-    doc
-        .moveTo(20, doc.y)
-        .lineTo(280, doc.y)
-        .dash(3, { space: 2 })
-        .strokeColor("#d1d5db")
-        .stroke();
-    doc.undash();
 
     doc.moveDown(1);
 
-    // --- TOTALES ---
-    const totalY = doc.y;
-
+    // TOTALES
     doc
         .fontSize(10)
         .fillColor("black")
         .font("Helvetica")
-        .text(`Subtotal:`, 20, totalY)
-        .text(`$${subtotal.toFixed(2)}`, 220, totalY, { width: 60, align: "right" });
+        .text(`Subtotal: $${subtotal.toFixed(2)}`);
 
-    doc.moveDown(0.5);
-
+    // ✅ Usar el impuesto que viene del frontend
     doc
-        .text(`IVA (16%):`, 20, doc.y)
-        .text(`$${iva.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
+        .text(`IVA (${impuesto_porcentaje.toFixed(0)}%):`, 20, doc.y)
+        .text(`$${impuesto.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
 
-    doc.moveDown(0.5);
-
-    // Cupón (si existe)
-    if (cupon && descuentoCupon > 0) {
+    if (descuentoCupon > 0) {
         doc
             .fillColor("#10b981")
-            .text(`Cupón (${cupon.codigo} -${cupon.descuento}%):`, 20, doc.y)
-            .text(`-$${descuentoCupon.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
-        
-        doc.moveDown(0.5);
+            .text(`Cupón (${cupon.codigo} -${cupon.descuento}%): -$${descuentoCupon.toFixed(2)}`);
     }
 
-    // Envío
+    // ✅ Usar el envío que viene del frontend
     doc
         .fillColor("black")
-        .text(`Envío:`, 20, doc.y)
-        .text(envio === 0 ? "GRATIS" : `$${envio.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
+        .text(`Envío: ${envio === 0 ? "GRATIS" : `$${envio.toFixed(2)}`}`)
+        .text(`Productos Totales: ${totalUnidades}`);
 
     doc.moveDown(1);
-
-    // Línea separadora para total
-    doc
-        .moveTo(20, doc.y)
-        .lineTo(280, doc.y)
-        .lineWidth(1.5)
-        .strokeColor("#0b2f23")
-        .stroke();
-
-    doc.moveDown(0.8);
 
     // TOTAL FINAL
     doc
         .fontSize(14)
         .fillColor("#0b2f23")
         .font("Helvetica-Bold")
-        .text(`TOTAL:`, 20, doc.y)
+        .text("TOTAL:")
+
         .fontSize(16)
         .fillColor("#ffd700")
-        .text(`$${totalFinal.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
-
-    // Calcular espacio restante para centrar el footer
-    const alturaTotal = 600;
-    const espacioRestante = alturaTotal - doc.y - 120; // 120 es aprox. altura del footer
-    
-    if (espacioRestante > 0) {
-        doc.moveDown(espacioRestante / 12); // Convertir a "líneas"
-    } else {
-        doc.moveDown(1);
-    }
-
-    // Línea decorativa final
-    doc
-        .moveTo(20, doc.y)
-        .lineTo(280, doc.y)
-        .lineWidth(2)
-        .strokeColor("#ffd700")
-        .stroke();
+        .text(`$${totalFinal.toFixed(2)}`, { align: "right" });
 
     doc.moveDown(1);
 
-    // --- MENSAJE FINAL ---
+    // FOOTER
     doc
         .fontSize(10)
         .fillColor("#0b2f23")
         .font("Helvetica-Bold")
         .text("¡Gracias por su compra!", { align: "center" });
-
-    doc.moveDown(0.5);
 
     doc
         .fontSize(8)

@@ -10,8 +10,11 @@ const {
     //eliminarProducto
 } = require('../controllers/productosController');
 
+
+const authUser=require("../middlewares/validaUsuario");
+
 // Obtener todos los productos
-router.get('/', getAllProductos);
+router.get('/', authUser, getAllProductos);
 
 // Obtener un producto por ID
 router.get('/:id', getProductoById);

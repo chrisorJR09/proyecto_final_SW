@@ -40,4 +40,29 @@ form.addEventListener('submit', async (e) => {
 
     const data = await res.json();
     msg.textContent = data.message || data.error;
+
+    if (res.ok) {
+        msg.style.color = "lightgreen";
+
+        // Crear enlace
+        const link = document.createElement("a");
+        link.href = "login.html";
+        link.textContent = "Volver al inicio de sesión";
+        link.style.display = "block";
+        link.style.marginTop = "10px";
+        link.style.color = "#ffd700";
+        link.style.fontWeight = "600";
+        link.style.textDecoration = "none";
+
+        link.addEventListener("mouseover", () => {
+            link.style.textDecoration = "underline";
+        });
+        link.addEventListener("mouseout", () => {
+            link.style.textDecoration = "none";
+        });
+
+        // Agregar al HTML debajo del mensaje
+        msg.appendChild(link);
+    }
+    
 });

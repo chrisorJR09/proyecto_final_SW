@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TecnoMex - Tienda</title>
     <link rel="stylesheet" href="../css/productos.css">
+    <link rel="stylesheet" href="../css/filtros.css">
+    
 </head>
 <body>
 
     <!-- HEADER -->
     <header class="main-header">
-        <script src="imagenes.js"></script>
-
         <div class="header-left">
             <img src="http://localhost:3000/uploads/logo.png" alt="Logo TecnoMex" class="logo-img">
             <a href="inicio.html" class="logo">TecnoMex</a>
         </div>
-
 
         <nav class="header-nav">
             <a href="inicio.html">Inicio</a>
@@ -45,6 +44,60 @@
     <section class="store-title">
         <h1>Nuestra Tienda de Tecnología</h1>
         <p>Encuentra los mejores productos al mejor precio</p>
+    </section>
+
+    <!-- SECCIÓN DE FILTROS -->
+    <section class="filtros-section">
+        <div class="filtros-container">
+            <h2 class="filtros-title"> Filtrar Productos</h2>
+            
+            <div class="filtros-grid">
+                <!-- Filtro por Categoría -->
+                <div class="filtro-group">
+                    <label for="filter-categoria"> Categoría</label>
+                    <input type="text" id="filter-categoria" placeholder="Ej: Laptop, Celular, Tablet...">
+                </div>
+
+                <!-- Filtro por Precio Mínimo -->
+                <div class="filtro-group">
+                    <label for="filter-min">Precio Mínimo</label>
+                    <input type="number" id="filter-min" placeholder="$0">
+                </div>
+
+                <!-- Filtro por Precio Máximo -->
+                <div class="filtro-group">
+                    <label for="filter-max">Precio Máximo</label>
+                    <input type="number" id="filter-max" placeholder="$999999">
+                </div>
+
+                <!-- Ordenar por -->
+                <div class="filtro-group">
+                    <label for="filter-orden">    Ordenar por</label>
+                    <select id="filter-orden">
+                        <option value="">Sin ordenar</option>
+                        <option value="precio-asc">Precio: Menor a Mayor</option>
+                        <option value="precio-desc">Precio: Mayor a Menor</option>
+                        <option value="nombre">Nombre A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filtros-actions">
+                <button class="btn-filtro primary" onclick="aplicarFiltros()">
+                    Aplicar Filtros
+                </button>
+                <button class="btn-filtro ofertas" onclick="verOfertas()">
+                    Ver Ofertas
+                </button>
+                <button class="btn-filtro secondary" onclick="limpiarFiltros()">
+                    Limpiar Todo
+                </button>
+            </div>
+
+            <div class="resultados-info" id="resultados-info" style="display: none;">
+                Mostrando <span id="num-resultados">0</span> productos
+            </div>
+        </div>
     </section>
 
     <!-- PRODUCTOS -->
@@ -90,7 +143,7 @@
                 <h3 class="footer-logo">TecnoMex</h3>
                 <p class="footer-desc">La mejor tienda de tecnología en México. Productos de calidad al mejor precio.</p>
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/tecnomex.mx/     " aria-label="Facebook">
+                    <a href="https://www.instagram.com/tecnomex.mx/" aria-label="Facebook">
                         <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
@@ -132,8 +185,7 @@
                     <li><a href="#">Laptops</a></li>
                     <li><a href="#">Celulares</a></li>
                     <li><a href="#">Tablets</a></li>
-                    <li><a href="#">Todo los Productos</a></li>
-                    
+                    <li><a href="#">Todos los Productos</a></li>
                 </ul>
             </div>
 
@@ -176,19 +228,30 @@
 
         <!-- Copyright -->
         <div class="footer-bottom">
-            <p>TecnoMex © 2025 — Todos los derechos reservados - Trata de un proyecto academico</p>   
+            <p>TecnoMex © 2025 – Todos los derechos reservados - Trata de un proyecto académico</p>   
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
         const API_BASE_URL = "http://localhost:3000";
+        const API_TIENDA = "http://localhost:3000/api/tienda";
     </script>
 
+    <!-- Cargar carritoManager antes de usarlo -->
     <script src="../js/carritoManager.js"></script>
     <script src="../js/wishlistManager.js"></script>
 
     <script>
 
+// =============================================
+// VARIABLE GLOBAL PARA PRODUCTOS
+// =============================================
+let todosLosProductos = [];
+
+// =============================================
+// CARGAR PRODUCTOS DESDE LA BD
+// =============================================
 async function cargarProductos() {
     const container = document.getElementById("productos-container");
     
@@ -196,35 +259,8 @@ async function cargarProductos() {
         const respuesta = await fetch(`${API_BASE_URL}/api/productos`);
         const productos = await respuesta.json();
 
-        container.innerHTML = "";
-
-        productos.forEach(prod => {
-            container.innerHTML += `
-                <div class="producto-card">
-                    <img src="${API_BASE_URL}/uploads/${prod.imagen}" 
-                         alt="${prod.nombre}"
-                         onerror="this.src='https://via.placeholder.com/280x220?text=Sin+Imagen'">
-
-                    <div class="producto-info">
-                        <h3>${prod.nombre}</h3>
-                        <p>${prod.descripcion}</p>
-                        <div class="producto-precio">$${prod.precio}</div>
-
-                        <div class="producto-actions">
-                            <button class="btn-agregar" onclick='agregarAlCarrito(${JSON.stringify(prod)})'>
-                                Agregar al Carrito
-                            </button>
-
-                            <button class="btn-wishlist"
-                                data-producto-id="${prod.id}"
-                                onclick='toggleWishlist(${JSON.stringify(prod)})'>
-                                🤍
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+        todosLosProductos = productos;
+        mostrarProductos(productos);
 
     } catch (error) {
         console.error("Error al cargar productos:", error);
@@ -232,10 +268,164 @@ async function cargarProductos() {
     }
 }
 
-function agregarAlCarrito(producto) {
-    carritoManager.agregarProducto(producto);
+// =============================================
+// MOSTRAR PRODUCTOS EN EL DOM
+// =============================================
+function mostrarProductos(productos) {
+    const container = document.getElementById("productos-container");
+    const resultadosInfo = document.getElementById("resultados-info");
+    const numResultados = document.getElementById("num-resultados");
+
+    if (!productos || productos.length === 0) {
+        container.innerHTML = '<p class="empty-message">No se encontraron productos con estos filtros.</p>';
+        resultadosInfo.style.display = 'none';
+        return;
+    }
+
+    numResultados.textContent = productos.length;
+    resultadosInfo.style.display = 'block';
+
+    container.innerHTML = "";
+
+    productos.forEach(prod => {
+        const agotado = prod.stock === 0;
+
+        container.innerHTML += `
+            <div class="producto-card ${agotado ? 'agotado' : ''}">
+                <img src="${API_BASE_URL}/uploads/${prod.imagen}" 
+                     alt="${prod.nombre}"
+                     onerror="this.src='https://via.placeholder.com/280x220?text=Sin+Imagen'">
+
+                <div class="producto-info">
+                    <h3>${prod.nombre}</h3>
+                    <p>${prod.descripcion}</p>
+                    
+                    ${prod.oferta ? `<div class="oferta-badge">🔥 Oferta: $${prod.oferta}</div>` : ''}
+                    <div class="producto-precio">$${prod.precio}</div>
+
+                    ${agotado ? `
+                        <div class="producto-agotado">Producto agotado</div>
+                    ` : ''}
+
+                    <div class="producto-actions">
+                        <button class="btn-agregar" 
+                                ${agotado ? 'disabled' : ''}
+                                onclick='${!agotado ? `agregarAlCarrito(${JSON.stringify(prod)})` : ''}'>
+                            ${agotado ? 'No disponible' : 'Agregar al Carrito'}
+                        </button>
+
+                        <button class="btn-wishlist"
+                            data-producto-id="${prod.id}"
+                            ${agotado ? 'disabled' : ''}
+                            onclick='${!agotado ? `toggleWishlist(${JSON.stringify(prod)})` : ''}'>
+                            🤍
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
 }
 
+
+// =============================================
+// APLICAR FILTROS
+// =============================================
+async function aplicarFiltros() {
+    const categoria = document.getElementById('filter-categoria').value.trim();
+    const min = document.getElementById('filter-min').value;
+    const max = document.getElementById('filter-max').value;
+    const orden = document.getElementById('filter-orden').value;
+
+    let url = `${API_TIENDA}/public`;
+    let productos = [];
+
+    try {
+        // Filtrar por categoría
+        if (categoria) {
+            const respuesta = await fetch(`${API_TIENDA}/filtro/categoria/${encodeURIComponent(categoria)}`);
+            productos = await respuesta.json();
+        } 
+        // Filtrar por rango de precio
+        else if (min || max) {
+            const minPrecio = min || 0;
+            const maxPrecio = max || 999999;
+            const respuesta = await fetch(`${API_TIENDA}/filtro/precio?min=${minPrecio}&max=${maxPrecio}`);
+            productos = await respuesta.json();
+        } 
+        // Sin filtros específicos
+        else {
+            const respuesta = await fetch(url);
+            productos = await respuesta.json();
+        }
+
+        // Aplicar ordenamiento
+        if (orden) {
+            productos = ordenarProductos(productos, orden);
+        }
+
+        mostrarProductos(productos);
+
+    } catch (error) {
+        console.error('Error al aplicar filtros:', error);
+        const container = document.getElementById("productos-container");
+        container.innerHTML = '<p class="empty-message">Error al aplicar los filtros.</p>';
+    }
+}
+
+// =============================================
+// ORDENAR PRODUCTOS
+// =============================================
+function ordenarProductos(productos, tipo) {
+    const copia = [...productos];
+    
+    switch(tipo) {
+        case 'precio-asc':
+            return copia.sort((a, b) => parseFloat(a.precio) - parseFloat(b.precio));
+        case 'precio-desc':
+            return copia.sort((a, b) => parseFloat(b.precio) - parseFloat(a.precio));
+        case 'nombre':
+            return copia.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        default:
+            return copia;
+    }
+}
+
+// =============================================
+// VER OFERTAS
+// =============================================
+async function verOfertas() {
+    try {
+        const respuesta = await fetch(`${API_TIENDA}/filtro/ofertas`);
+        const productos = await respuesta.json();
+        mostrarProductos(productos);
+    } catch (error) {
+        console.error('Error al cargar ofertas:', error);
+    }
+}
+
+// =============================================
+// LIMPIAR FILTROS
+// =============================================
+function limpiarFiltros() {
+    document.getElementById('filter-categoria').value = '';
+    document.getElementById('filter-min').value = '';
+    document.getElementById('filter-max').value = '';
+    document.getElementById('filter-orden').value = '';
+    
+    mostrarProductos(todosLosProductos);
+}
+
+// =============================================
+// AGREGAR AL CARRITO (BACKEND)
+// =============================================
+async function agregarAlCarrito(producto) {
+    await carritoManager.agregarProducto(producto);
+}
+
+// =============================================
+// WISHLIST (SIGUE EN LOCALSTORAGE)
+// =============================================
 function toggleWishlist(producto) {
     wishlistManager.toggleProducto(producto);
 
@@ -245,6 +435,9 @@ function toggleWishlist(producto) {
     actualizarContadores();
 }
 
+// =============================================
+// MOSTRAR CARRITO (DESDE BACKEND)
+// =============================================
 function mostrarCarrito() {
     const carrito = carritoManager.obtenerCarrito();
     const container = document.getElementById('carrito-items');
@@ -254,36 +447,60 @@ function mostrarCarrito() {
         container.innerHTML = '<p class="empty-message">El carrito está vacío</p>';
         totalContainer.innerHTML = '';
     } else {
-        container.innerHTML = carrito.map(item => `
-            <div class="cart-item">
-                <img src="${API_BASE_URL}/uploads/${item.imagen}"
-                     alt="${item.nombre}"
-                     onerror="this.src='https://placehold.co/90x90?text=No+Img'">
+        container.innerHTML = carrito.map(item => {
+            const precioUnitario = item.precio_unitario || item.precio || 0;
+            const precioOriginal = item.precio_original || item.precio || 0;
+            const estaEnOferta = item.esta_en_oferta || (item.oferta && item.oferta !== 0);
+            const subtotal = precioUnitario * item.cantidad;
 
-                <div class="item-info">
-                    <h4>${item.nombre}</h4>
-                    <p>$${Number(item.precio).toFixed(2)} c/u</p>
+            return `
+                <div class="cart-item">
+                    <img src="${API_BASE_URL}/uploads/${item.imagen}"
+                         alt="${item.nombre}"
+                         onerror="this.src='https://placehold.co/90x90?text=No+Img'">
 
-                    <div class="item-quantity">
-                        <button onclick="cambiarCantidad(${item.id}, ${item.cantidad - 1})">-</button>
-                        <span>${item.cantidad}</span>
-                        <button onclick="cambiarCantidad(${item.id}, ${item.cantidad + 1})">+</button>
-                        <button class="btn-delete" onclick="eliminarDelCarrito(${item.id})">🗑️</button>
+                    <div class="item-info">
+                        <h4>${item.nombre}</h4>
+                        
+                        ${estaEnOferta ? `
+                            <p style="color: #e74c3c;">
+                                <span style="text-decoration: line-through; color: #999;">$${precioOriginal.toFixed(2)}</span>
+                                → <strong>$${precioUnitario.toFixed(2)}</strong> c/u
+                                <span style="font-size: 0.85em; font-weight: bold;">¡OFERTA!</span>
+                            </p>
+                        ` : `
+                            <p>$${precioUnitario.toFixed(2)} c/u</p>
+                        `}
+
+                        <div class="item-quantity">
+                            <button onclick="cambiarCantidad(${item.id}, ${item.cantidad - 1})">-</button>
+                            <span>${item.cantidad}</span>
+                            <button onclick="cambiarCantidad(${item.id}, ${item.cantidad + 1})">+</button>
+                            <button class="btn-delete" onclick="eliminarDelCarrito(${item.id})">🗑️</button>
+                        </div>
+                    </div>
+
+                    <div class="item-price">
+                        <strong>$${subtotal.toFixed(2)}</strong>
                     </div>
                 </div>
+            `;
+        }).join('');
 
-                <div class="item-price">
-                    $${(Number(item.precio) * item.cantidad).toFixed(2)}
-                </div>
+        const total = carritoManager.calcularTotal();
+        totalContainer.innerHTML = `
+            <div style="text-align: right; padding: 15px; font-size: 1.2em;">
+                <strong>Total: $${total.toFixed(2)}</strong>
             </div>
-        `).join('');
-
-    totalContainer.innerHTML = "";
+        `;
     }
 
     document.getElementById('modal-carrito').classList.add('active');
 }
 
+// =============================================
+// MOSTRAR WISHLIST (LOCALSTORAGE)
+// =============================================
 function mostrarWishlist() {
     const wishlist = wishlistManager.obtenerWishlist();
     const container = document.getElementById('wishlist-items');
@@ -299,7 +516,7 @@ function mostrarWishlist() {
 
                 <div class="item-info">
                     <h4>${item.nombre}</h4>
-                    <p>$${Number(item.precio).toFixed(2)}</p>
+                    <p>${Number(item.precio).toFixed(2)}</p>
 
                     <button class="btn-agregar" onclick="moverAlCarrito(${item.id})">
                         Mover al Carrito
@@ -316,29 +533,50 @@ function mostrarWishlist() {
     document.getElementById('modal-wishlist').classList.add('active');
 }
 
-function cambiarCantidad(id, nuevaCantidad) {
-    carritoManager.actualizarCantidad(id, nuevaCantidad);
+// =============================================
+// CAMBIAR CANTIDAD (BACKEND)
+// =============================================
+async function cambiarCantidad(productoId, nuevaCantidad) {
+    await carritoManager.actualizarCantidad(productoId, nuevaCantidad);
     mostrarCarrito();
 }
 
-function eliminarDelCarrito(id) {
-    carritoManager.eliminarProducto(id);
-    mostrarCarrito();
+// =============================================
+// ELIMINAR DEL CARRITO (BACKEND)
+// =============================================
+function eliminarDelCarrito(productoId) {
+    if (confirm('¿Eliminar este producto del carrito?')) {
+        carritoManager.eliminarProducto(productoId);
+        mostrarCarrito();
+    }
 }
 
+// =============================================
+// WISHLIST FUNCTIONS
+// =============================================
 function eliminarDelWishlist(id) {
     wishlistManager.eliminarProducto(id);
-    mostrarWishlist();
-}
-
-function moverAlCarrito(id) {
-    wishlistManager.moverAlCarrito(id);
     mostrarWishlist();
     actualizarContadores();
 }
 
-function finalizarCompra() {
-    const carrito = carritoManager.obtenerCarrito();
+async function moverAlCarrito(productoId) {
+    const wishlist = wishlistManager.obtenerWishlist();
+    const producto = wishlist.find(p => p.id === productoId);
+    
+    if (producto) {
+        await carritoManager.agregarProducto(producto);
+        wishlistManager.eliminarProducto(productoId);
+        mostrarWishlist();
+        await actualizarContadores();
+    }
+}
+
+// =============================================
+// FINALIZAR COMPRA
+// =============================================
+async function finalizarCompra() {
+    const carrito = await carritoManager.obtenerCarrito();
 
     if (carrito.length === 0) {
         alert("Tu carrito está vacío.");
@@ -349,24 +587,37 @@ function finalizarCompra() {
     window.location.href = "checkout.html";
 }
 
+// =============================================
+// CERRAR MODAL
+// =============================================
 function cerrarModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
 }
 
-function actualizarContadores() {
-    carritoManager.actualizarUI();
+// =============================================
+// ACTUALIZAR CONTADORES
+// =============================================
+async function actualizarContadores() {
+    await carritoManager.actualizarUI();
     wishlistManager.actualizarUI();
 }
 
-// Cerrar modales al hacer clic fuera
+// =============================================
+// CERRAR MODALES AL HACER CLIC FUERA
+// =============================================
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         event.target.classList.remove('active');
     }
 }
 
-cargarProductos();
-actualizarContadores();
+// =============================================
+// INICIALIZAR AL CARGAR LA PÁGINA
+// =============================================
+document.addEventListener('DOMContentLoaded', async () => {
+    await cargarProductos();
+    await actualizarContadores();
+});
 
 </script>
 <script src="../js/accessibility-widget.js"></script>

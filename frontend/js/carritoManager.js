@@ -1,4 +1,4 @@
-/* carritoManager.js - Manejo del carrito en Local Storage */
+/* carritoManager.js - Manejo del carrito con soporte de ofertas */
 
 class CarritoManager {
     constructor() {
@@ -34,13 +34,25 @@ class CarritoManager {
             const carrito = this.obtenerCarrito();
             let item = carrito.find(p => p.id === producto.id);
 
+            // Determinar el precio a usar (oferta o precio normal)
+            const precioFinal = Number(productoDB.oferta) !== 0 
+                ? Number(productoDB.oferta) 
+                : Number(productoDB.precio);
+            const estaEnOferta = Number(productoDB.oferta) !== 0;
+
             if (item) {
                 if (item.cantidad >= productoDB.stock) {
                     alert(`Solo hay ${productoDB.stock} unidades disponibles`);
                     return;
                 }
                 item.cantidad++;
+                // Actualizar precios por si cambiaron
+                item.precio_unitario = precioFinal;
+                item.precio_original = Number(productoDB.precio);
+                item.oferta = estaEnOferta ? Number(productoDB.oferta) : 0;
+                item.esta_en_oferta = estaEnOferta;
             } else {
+<<<<<<< HEAD
                 carrito.push({
                     ...producto,
                     cantidad: 1,
@@ -48,11 +60,29 @@ class CarritoManager {
                     precio: Number(productoDB.precio),
                 });
             }
+=======
+            carrito.push({
+                id: productoDB.id,
+                nombre: productoDB.nombre,
+                descripcion: productoDB.descripcion,
+                imagen: productoDB.imagen,
+                categoria: productoDB.categoria, // ⭐ Asegúrate de incluir esto
+                cantidad: 1,
+                stock: productoDB.stock,
+                precio_unitario: precioFinal,
+                precio_original: Number(productoDB.precio),
+                oferta: estaEnOferta ? Number(productoDB.oferta) : 0,
+                esta_en_oferta: estaEnOferta
+            });
+        }
+>>>>>>> develop
 
             this.guardarCarrito(carrito);
+            alert(`✅ ${productoDB.nombre} agregado al carrito`);
 
         } catch (error) {
             console.error("Error al agregar al carrito:", error);
+            alert("Error al agregar producto al carrito");
         }
     }
 
@@ -68,16 +98,32 @@ class CarritoManager {
             return;
         }
 
-        const response = await fetch(`${API_BASE_URL}/api/productos/${idProducto}`);
-        const productoDB = await response.json();
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/productos/${idProducto}`);
+            const productoDB = await response.json();
 
-        if (nuevaCantidad > productoDB.stock) {
-            alert(`No puedes agregar más de ${productoDB.stock} unidades`);
-            return;
+            if (nuevaCantidad > productoDB.stock) {
+                alert(`No puedes agregar más de ${productoDB.stock} unidades`);
+                return;
+            }
+
+            item.cantidad = nuevaCantidad;
+
+            // Actualizar precios por si cambiaron
+            const precioFinal = Number(productoDB.oferta) !== 0 
+                ? Number(productoDB.oferta) 
+                : Number(productoDB.precio);
+            const estaEnOferta = Number(productoDB.oferta) !== 0;
+
+            item.precio_unitario = precioFinal;
+            item.precio_original = Number(productoDB.precio);
+            item.oferta = estaEnOferta ? Number(productoDB.oferta) : 0;
+            item.esta_en_oferta = estaEnOferta;
+
+            this.guardarCarrito(carrito);
+        } catch (error) {
+            console.error("Error al actualizar cantidad:", error);
         }
-
-        item.cantidad = nuevaCantidad;
-        this.guardarCarrito(carrito);
     }
 
     eliminarProducto(productoId) {
@@ -98,10 +144,22 @@ class CarritoManager {
     }
 
     calcularTotal() {
-    const carrito = this.obtenerCarrito();
-    return carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
-}
+        const carrito = this.obtenerCarrito();
+        return carrito.reduce((acc, item) => {
+            const precio = item.precio_unitario || item.precio || 0;
+            return acc + (precio * item.cantidad);
+        }, 0);
+    }
 
+    // Obtener desglose detallado del carrito
+    obtenerDesglose() {
+        const carrito = this.obtenerCarrito();
+        return carrito.map(item => ({
+            ...item,
+            subtotal: item.precio_unitario * item.cantidad,
+            descuento: item.esta_en_oferta ? (item.precio_original - item.precio_unitario) * item.cantidad : 0
+        }));
+    }
 
     // Finalizar compra
     async finalizarCompra() {
@@ -165,7 +223,9 @@ async function procesarVenta() {
         alert("Venta registrada exitosamente. Ticket #" + data.id_venta);
 
         carritoManager.vaciarCarrito();
-        mostrarCarrito();
+        if (typeof mostrarCarrito === 'function') {
+            mostrarCarrito();
+        }
 
     } catch (error) {
         console.error("Error al procesar venta:", error);

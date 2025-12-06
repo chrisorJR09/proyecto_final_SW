@@ -15,18 +15,30 @@ const generarTicket = (req, res) => {
         metodo, 
         productos,
         cupon = null,
-        subtotal,  // ✅ Recibir desde el frontend
-        impuesto,  // ✅ Monto del impuesto ya calculado
-        impuesto_porcentaje = 16,  // ✅ Solo para mostrar el %
-        envio = 0,  // ✅ Costo de envío del frontend
-        total,  // ✅ Total ya calculado
+        subtotal,
+        impuesto,
+        impuesto_porcentaje = 16,
+        envio = 0,
+        total,
         metodo_envio = "Envío estándar",
         empleado = "Sistema", 
         id_venta = Date.now()
     } = req.body;
 
+    // ✅ VALIDACIÓN: Verificar que los datos críticos existan
+    if (!productos || productos.length === 0) {
+        return res.status(400).json({ error: "No hay productos en la orden" });
+    }
+
+    if (isNaN(subtotal) || isNaN(impuesto) || isNaN(total)) {
+        return res.status(400).json({ 
+            error: "Datos de totales inválidos",
+            detalles: { subtotal, impuesto, total }
+        });
+    }
+
     // Calcular total de unidades
-    const totalUnidades = productos.reduce((sum, p) => sum + p.cantidad, 0);
+    const totalUnidades = productos.reduce((sum, p) => sum + (p.cantidad || 0), 0);
 
     // Cupón (si aplica)
     let descuentoCupon = 0;
@@ -34,7 +46,7 @@ const generarTicket = (req, res) => {
         descuentoCupon = subtotal * (cupon.descuento / 100);
     }
 
-    // Total final (usar el que viene del frontend si no hay cupón)
+    // Total final
     const totalFinal = total || (subtotal + impuesto - descuentoCupon + envio);
 
     // Fecha y hora
@@ -167,18 +179,21 @@ const generarTicket = (req, res) => {
         .text("PRODUCTOS", { underline: true });
 
     productos.forEach((p) => {
-        const precioTotal = p.precio * p.cantidad;
+        // ✅ SOLUCIÓN: Usar precio_unitario si existe, sino precio, con valor por defecto 0
+        const precioUnitario = Number(p.precio_unitario) || Number(p.precio) || 0;
+        const cantidad = Number(p.cantidad) || 1;
+        const precioTotal = precioUnitario * cantidad;
 
         doc
             .fontSize(10)
             .fillColor("black")
             .font("Helvetica")
-            .text(`${p.nombre}`);
+            .text(`${p.nombre || 'Producto sin nombre'}`);
 
         doc
             .fontSize(9)
             .fillColor("#666")
-            .text(`${p.cantidad} x $${p.precio.toFixed(2)}`);
+            .text(`${cantidad} x $${precioUnitario.toFixed(2)}`);
 
         doc
             .fontSize(10)
@@ -197,7 +212,6 @@ const generarTicket = (req, res) => {
         .font("Helvetica")
         .text(`Subtotal: $${subtotal.toFixed(2)}`);
 
-    // ✅ Usar el impuesto que viene del frontend
     doc
         .text(`IVA (${impuesto_porcentaje.toFixed(0)}%):`, 20, doc.y)
         .text(`$${impuesto.toFixed(2)}`, 220, doc.y, { width: 60, align: "right" });
@@ -208,7 +222,6 @@ const generarTicket = (req, res) => {
             .text(`Cupón (${cupon.codigo} -${cupon.descuento}%): -$${descuentoCupon.toFixed(2)}`);
     }
 
-    // ✅ Usar el envío que viene del frontend
     doc
         .fillColor("black")
         .text(`Envío: ${envio === 0 ? "GRATIS" : `$${envio.toFixed(2)}`}`)

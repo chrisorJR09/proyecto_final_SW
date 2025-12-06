@@ -6,6 +6,7 @@ const svgCaptcha = require("svg-captcha");
 const nodemailer=require("nodemailer");
 const crypto = require("crypto");
 const {intentos, bloqueos}=require("../utils/login.state");
+const bcrypt=require("bcrypt");
 
 let CAPTCHA_GENERADO="";
 // const intentos={};
@@ -35,7 +36,15 @@ const login= async (req,res)=>{
             return res.status(401).json({"Error": "usuario no encontado"});
         }
         
-        if(correct_user.password !== password){
+        const passwordValido = await bcrypt.compare(
+            password,
+            correct_user.password
+        );
+
+
+        if (!passwordValido) {
+            intentos[user] = (intentos[user] || 0) + 1;
+
             console.log("PASSWORD RECIBIDO:", password);
             console.log("PASSWORD REAL:", correct_user.password);
             intentos[user]++;
@@ -95,7 +104,10 @@ const newUser=async (req,res)=>{
         if (validacionCorreo)
             return res.status(401).json({message: "El correo ya está registrado."});
 
-        const nuevo_usuario= await agregarUsuario(userName, password, email, nombre, apellido);
+        const saltRounds = 10;
+        const passwordHash = await bcrypt.hash(password, saltRounds);
+
+        const nuevo_usuario= await agregarUsuario(userName, passwordHash, email, nombre, apellido);
         return res.status(201).json({
             mensaje: `Usuario ${userName} agregado.`,
             idUsuario:
@@ -158,7 +170,7 @@ const resetPassword= async (req, res)=>{
         await guardarTokenReset(correo, token, expiracion);
 
         //const resetLink = `http://localhost:3000/sesion/resetPassword/${token}`;
-        const resetLink = `http://localhost:5500/new-password.html?token=${token}`;
+        const resetLink = `http://localhost:5501/proyecto_final_SW/frontend/html/nuevoPassword.html?token=${token}`;
         
 
         const transporter = nodemailer.createTransport({
@@ -217,7 +229,10 @@ const actualizarPasswordInDB= async (req, res)=>{
     console.log(token, nvoPassword);
     
     try{
-        const passwordActualizado=await actualizaPassword(token, nvoPassword);
+
+        const hash = await bcrypt.hash(nvoPassword, 10);
+
+        const passwordActualizado=await actualizaPassword(token, hash);
 
         if(!passwordActualizado)
             return res.status(404).json({message: "No se encontró la cuenta"});

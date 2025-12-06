@@ -42,6 +42,10 @@ function iniciarSesion(event) {
                 localStorage.setItem("rol", data.role);
                 localStorage.setItem("usuario", data.usuario);
 
+                setTimeout(() => {
+                    window.location.href = "../html/inicio.html";
+                }, 1500);
+
             } else {
                 document.getElementById("mensaje").style.color = "red";
                 recargarCaptcha();

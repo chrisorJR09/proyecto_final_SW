@@ -2,6 +2,9 @@
 const express = require('express');
 const router = express.Router();
 
+// Importar middleware
+const authAdmin = require("../middlewares/admin.middleware.js");
+
 const {
     getVentasProducto,
     getVentasProductoById,
@@ -11,7 +14,7 @@ const {
 
  
 // Rutas para ventas por producto
-router.get('/', getVentasProducto);
-router.get('/:id', getVentasProductoById);
+router.get('/', authAdmin, getVentasProducto);
+router.get('/:id', authAdmin, getVentasProductoById);
 
 module.exports = router;

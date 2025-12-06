@@ -1,6 +1,3 @@
-// ============================================= 
-// CHECKOUT.JS - VERSIÓN CON LOCAL STORAGE
-// ============================================= 
 const API_BASE_URL = "https://proyectofinalsw.onrender.com";
 const extraPago = document.getElementById("extra-pago");
 

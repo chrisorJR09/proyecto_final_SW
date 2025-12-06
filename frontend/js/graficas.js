@@ -229,7 +229,7 @@ async function cargarReporteExistencias() {
     contenedor.innerHTML = "<h3>Cargando reporte...</h3>";
 
     try {
-        const respuesta = await fetch("http://localhost:3000/api/productos");
+        const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/productos");
         const productos = await respuesta.json();
 
         // Agrupar productos por categoría

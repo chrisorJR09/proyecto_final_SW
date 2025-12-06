@@ -11,7 +11,7 @@ if (!token) {
 
 // 1️⃣ Validar token con el backend
 async function validarToken() {
-    const res = await fetch(`http://localhost:3000/sesion/resetPassword/${token}`);
+    const res = await fetch(`https://proyectofinalsw.onrender.com/sesion/resetPassword/${token}`);
     const data = await res.json();
 
     if (!res.ok) {
@@ -32,7 +32,7 @@ form.addEventListener('submit', async (e) => {
 
     const nvoPassword = document.getElementById('password').value;
 
-    const res = await fetch("http://localhost:3000/sesion/setNewPassword", {
+    const res = await fetch("https://proyectofinalsw.onrender.com/sesion/setNewPassword", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, nvoPassword })

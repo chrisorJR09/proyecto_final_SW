@@ -57,10 +57,6 @@ boton.addEventListener("click", (e) => {
     
 });
 
-
-
-
-
 /*Parte de mandar datos del login al backend*/
 const API_URL = "http://localhost:3000";
 function recargarCaptcha() {

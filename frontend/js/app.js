@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://proyectofinalsw.onrender.com"
+
 async function cargarProductos() {
     const container = document.getElementById("productos-container");
 

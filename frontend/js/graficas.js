@@ -7,10 +7,10 @@ const categoriaSection = document.getElementById("categoriaSection");
 const generalesSection = document.getElementById("generalesSection");
 const inventarioSection = document.getElementById("inventarioSection");
 
-const API_BASE_URL = "http://localhost:3000"; 
+const API_BASE_URL = "https://proyectofinalsw.onrender.com"; 
 
 async function cargarDatosCategoria() {
-    const respuesta = await fetch("http://localhost:3000/api/ventas_producto");
+    const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/ventas_producto");
     const data = await respuesta.json();
 
     // Ordenar por mayor venta para obtener la categoría top
@@ -37,7 +37,7 @@ async function cargarDatosCategoria() {
 
 async function cargarDatosInventario() {
     try {
-        const respuesta = await fetch("http://localhost:3000/api/inventario_grafica");
+        const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/inventario_grafica");
         const data = await respuesta.json();
 
         // Detectar automáticamente el nombre del campo
@@ -73,7 +73,7 @@ async function cargarDatosInventario() {
 
 async function cargarVentasGenerales() {
     try {
-        const respuesta = await fetch("http://localhost:3000/api/ventas_generales");
+        const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/ventas_generales");
         const data = await respuesta.json();
 
         // 1. Ventas Totales

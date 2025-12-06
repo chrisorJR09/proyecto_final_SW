@@ -20,6 +20,14 @@ class CarritoManager {
     // Agregar producto al carrito con validación de stock desde la BD
     async agregarProducto(producto) {
         try {
+
+            //validación de usuario con login 
+            const token=localStorage.getItem("token");
+            if(!token){
+                alert("Por favor inicia sesión para agregar productos al carrito");
+                return;
+            }
+
             const response = await fetch(`${API_BASE_URL}/api/productos/${producto.id}`);
             const productoDB = await response.json();
 
@@ -44,6 +52,15 @@ class CarritoManager {
                 item.oferta = estaEnOferta ? Number(productoDB.oferta) : 0;
                 item.esta_en_oferta = estaEnOferta;
             } else {
+<<<<<<< HEAD
+                carrito.push({
+                    ...producto,
+                    cantidad: 1,
+                    stock: productoDB.stock,
+                    precio: Number(productoDB.precio),
+                });
+            }
+=======
             carrito.push({
                 id: productoDB.id,
                 nombre: productoDB.nombre,
@@ -58,6 +75,7 @@ class CarritoManager {
                 esta_en_oferta: estaEnOferta
             });
         }
+>>>>>>> develop
 
             this.guardarCarrito(carrito);
             alert(`✅ ${productoDB.nombre} agregado al carrito`);

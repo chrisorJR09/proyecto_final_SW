@@ -1,4 +1,4 @@
-/* db/conexion.js */
+// db_conexion/conexion.js
 
 const mysql = require('mysql2/promise'); //1
 

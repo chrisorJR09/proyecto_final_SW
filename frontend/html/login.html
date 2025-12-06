@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Formulario de Login -->
+        <section id="formLgn" class="inactivo">
+            <div>
+                <form action="url" method="POST">
+                    <h2>Login</h2>
+                    <label for="username">Usuario</label>
+                    <input type="text" id="usernameL" name="username" required>
+
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="passwordL" id="passwordL" required>
+
+                    <label for="captcha">Captcha</label>
+                    <div>
+                        <img src="" alt="" id="captchaImageL">
+                    </div>
+
+                    <input type="text" name="captcha" id="captchaL">
+
+                    <div class="unregistered">
+                        <p>No tienes cuenta?</p>
+                        <a href="#formReg" id="regBtn">Registrarse</a>
+                    </div>
+
+                    <button type="submit" class="formBtn">Aceptar</button>
+                </form>
+            </div>
+        </section>
+</body>
+</html>

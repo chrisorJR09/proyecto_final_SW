@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin - Pruebas API</title>
+</head>
+
+
+<body>
+    <h1>Pruebas API Administrador</h1>
+
+    <h2>1. Obtener Productos</h2>
+    <button onclick="getProductos()">Cargar productos</button>
+    <pre id="productos"></pre>
+
+    <hr>
+
+    <h2>2. Crear Producto</h2>
+    <form id="form-crear">
+        <input type="text" placeholder="Categoría" id="c_categoria"><br>
+        <input type="text" placeholder="Nombre" id="c_nombre"><br>
+        <input type="number" placeholder="Precio" id="c_precio"><br>
+        <input type="number" placeholder="Oferta (nuevo precio)" id="c_oferta"><br>
+        <input type="text" placeholder="Descripción" id="c_descripcion"><br>
+        <input type="number" placeholder="Stock" id="c_stock"><br>
+        <input type="text" placeholder="URL Imagen" id="c_imagen"><br>
+        <button type="button" onclick="crearProducto()">Crear</button>
+    </form>
+
+    <pre id="create_res"></pre>
+
+    <hr>
+
+    <h2>3. Actualizar Producto</h2>
+    <form id="form-actualizar">
+        <input type="number" placeholder="ID" id="u_id"><br>
+        <input type="text" placeholder="Categoría" id="u_categoria"><br>
+        <input type="text" placeholder="Nombre" id="u_nombre"><br>
+        <input type="number" placeholder="Precio" id="u_precio"><br>
+        <input type="number" placeholder="Oferta" id="u_oferta"><br>
+        <input type="text" placeholder="Descripción" id="u_descripcion"><br>
+        <input type="number" placeholder="Stock" id="u_stock"><br>
+        <input type="text" placeholder="Imagen" id="u_imagen"><br>
+        <button type="button" onclick="actualizarProducto()">Actualizar</button>
+    </form>
+
+    <pre id="update_res"></pre>
+
+    <hr>
+
+    <h2>4. Eliminar Producto</h2>
+    <input type="number" id="d_id" placeholder="ID">
+    <button onclick="eliminarProducto()">Eliminar</button>
+    <pre id="delete_res"></pre>
+
+    <hr>
+
+    <h2>5. Cambiar Stock</h2>
+    <input type="number" id="s_id" placeholder="ID">
+    <input type="number" id="s_stock" placeholder="Nuevo stock">
+    <button onclick="cambiarStock()">Cambiar Stock</button>
+    <pre id="stock_res"></pre>
+
+    <script src="admin.js"></script>
+</body>
+</html>

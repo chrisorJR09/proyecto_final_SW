@@ -7,6 +7,8 @@ const categoriaSection = document.getElementById("categoriaSection");
 const generalesSection = document.getElementById("generalesSection");
 const inventarioSection = document.getElementById("inventarioSection");
 
+const API_BASE_URL = "${API_BASE_URL}"; 
+
 // =========================
 //   Mostrar / Ocultar
 // =========================
@@ -28,11 +30,10 @@ function mostrarInventario() {
     inventarioSection.style.display = "block";
 }
 
-// =========================
+
 //   Gráfica Categoría
-// =========================
 async function obtenerDatosCategoria() {
-    const respuesta = await fetch("http://localhost:3000/api/ventas_producto");
+    const respuesta = await fetch("${API_BASE_URL}/api/productos");
     return await respuesta.json();
 }
 
@@ -40,7 +41,7 @@ async function generarGraficaCategoria() {
     const datos = await obtenerDatosCategoria();
 
     const labels = datos.map(item => item.categoria);
-    const cantidades = datos.map(item => Number(item.cantidad_vendida));
+    const cantidades = datos.map(item => Number(item.stock));
 
     new Chart(ctxCategoria, {
         type: "bar",
@@ -48,7 +49,7 @@ async function generarGraficaCategoria() {
             labels: labels,
             datasets: [
                 {
-                    label: "Ventas Totales",
+                    label: "Stock Total",
                     data: cantidades,
                     backgroundColor: "rgba(54,162,235)"
                 }
@@ -57,13 +58,12 @@ async function generarGraficaCategoria() {
     });
 }
 
-// =========================
+
 //   Gráfica Generales
-// =========================
 let graficaGeneral = null;
 
 async function obtenerVentasPorPeriodo(fechaInicio, fechaFin) {
-    const respuesta = await fetch(`http://localhost:3000/api/ventas_generales?inicio=${fechaInicio}&fin=${fechaFin}`);
+    const respuesta = await fetch(`${API_BASE_URL}/api/ventas_generales?inicio=${fechaInicio}&fin=${fechaFin}`);
     return await respuesta.json();
 }
 
@@ -107,7 +107,7 @@ async function generarGraficaGenerales() {
 //     Gráfica Inventario
 // =========================
 async function generarGraficaInventario() {
-    const respuesta = await fetch("http://localhost:3000/api/inventario_grafica");
+    const respuesta = await fetch("${API_BASE_URL}/api/ventas_producto");
     const datos = await respuesta.json();
 
     const labels = datos.map(item => item.producto);

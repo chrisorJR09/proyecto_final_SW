@@ -62,7 +62,9 @@ const login= async (req,res)=>{
         )
         res.status(200).json({
             message: {"exito": `Bienvenido ${user}`},
-            token
+            token,
+            role: correct_user.rol,
+            usuario: correct_user.userName
         });
         console.log(`Bienvenido ${user}`)
     }catch(error){
@@ -105,17 +107,22 @@ const newUser=async (req,res)=>{
 };
 
 const genCaptcha=(req, res) => {
-  const captcha = svgCaptcha.create({
-    size: 5,
-    noise: 3,
-    color: true,
-    background: '#f2f2f2'
-  });
+    const captcha = svgCaptcha.create({
+      size: 5,
+      noise: 3,
+      color: true,
+      background: '#f2f2f2'
+    });
 
-  CAPTCHA_GENERADO = captcha.text;  // Guardamos el texto real
-  console.log(CAPTCHA_GENERADO);
-  res.type('svg');
-  res.status(200).send(captcha.data);
+    CAPTCHA_GENERADO = captcha.text;  // Guardamos el texto real
+    console.log(CAPTCHA_GENERADO);
+
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
+
+    res.type('svg');
+    res.status(200).send(captcha.data);
 };
 
 

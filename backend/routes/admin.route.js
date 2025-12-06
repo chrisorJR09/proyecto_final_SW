@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importar middleware
-const authAdmin = require("../admin.middleware.js");
+const authAdmin = require("../middlewares/admin.middleware.js");
 
 const {
     getProducto,

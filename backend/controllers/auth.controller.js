@@ -5,33 +5,25 @@ const jwt=require("jsonwebtoken");
 const svgCaptcha = require("svg-captcha");
 const nodemailer=require("nodemailer");
 const crypto = require("crypto");
-
+const {intentos, bloqueos}=require("../utils/login.state");
 
 let CAPTCHA_GENERADO="";
-const intentos={};
-const bloqueos={};
+// const intentos={};
+// const bloqueos={};
 
 
 const login= async (req,res)=>{
-    console.log("BODY RECIBIDO:", req.body);
-    const {user,password, captcha}=req.body; //pendiente agregar el captcha_user
-    
-    if(!user || !password){
-        return res.status(400).json({error: "Faltan crendenciales"});
-    }
+    const user = req.userLogin
+    const password = req.passwordLogin;    
 
-    if (!intentos[user]) {
-        intentos[user] = 0;
-    }
-    const ahora=Date.now();//obtenemos la hora
-    
+    const ahora = Date.now();
 
-    if(bloqueos[user] && ahora <bloqueos[user]){
-        const segundos = Math.ceil((bloqueos[user]-ahora)/1000);
-        return res.status(403).json({
-            Error: `Cuenta bloqueada. Intente de nuevo en ${segundos} segundos`
-        });
-    }
+    // if(bloqueos[user] && ahora <bloqueos[user]){
+    //     const segundos = Math.ceil((bloqueos[user]-ahora)/1000);
+    //     return res.status(403).json({
+    //         Error: `Cuenta bloqueada. Intente de nuevo en ${segundos} segundos`
+    //     });
+    // }
     
     try{
         //console.log("Aqui si llega el codigo")
@@ -39,26 +31,25 @@ const login= async (req,res)=>{
         console.log("USUARIO ENCONTRADO:", correct_user);
 
         if(!correct_user){
+            console.log("usuario no encontrado");
             return res.status(401).json({"Error": "usuario no encontado"});
         }
         
         if(correct_user.password !== password){
+            console.log("PASSWORD RECIBIDO:", password);
+            console.log("PASSWORD REAL:", correct_user.password);
             intentos[user]++;
-            console.log(intentos[user]);
+            console.log("Intentos de acceso: "+ intentos[user]);
             if (intentos[user]>2){
                 bloqueos[user]= ahora + (5*60*1000);
                 intentos[user]=0;
                 return res.status(403).json({Error: "Cuenta bloqueada por 5 minutos"}); 
             }
-            
+
+            console.log(`Contraseña incorrecta. Intentos ${intentos[user]} de 3`);
             return res.status(401).json({Error: `Contraseña incorrecta. Intentos ${intentos[user]} de 3`});
         }
 
-        const captcha_validado= validaCaptcha(captcha);
-
-        if(!captcha_validado){
-            return res.status(401).json({"Error": "captcha invalido"});
-        }
 
          // Si llegó hasta aquí: login exitoso
         intentos[user] = 0;  // Reiniciar intentos
@@ -71,9 +62,11 @@ const login= async (req,res)=>{
         )
         res.status(200).json({
             message: {"exito": `Bienvenido ${user}`},
-            token
+            token,
+            role: correct_user.rol,
+            usuario: correct_user.userName
         });
-        
+        console.log(`Bienvenido ${user}`)
     }catch(error){
         console.error("ERROR EN LOGIN:", error);
         res.status(500).json("Error al validar la petición");
@@ -114,18 +107,24 @@ const newUser=async (req,res)=>{
 };
 
 const genCaptcha=(req, res) => {
-  const captcha = svgCaptcha.create({
-    size: 5,
-    noise: 3,
-    color: true,
-    background: '#f2f2f2'
-  });
+    const captcha = svgCaptcha.create({
+      size: 5,
+      noise: 3,
+      color: true,
+      background: '#f2f2f2'
+    });
 
-  CAPTCHA_GENERADO = captcha.text;  // Guardamos el texto real
-  console.log(CAPTCHA_GENERADO);
-  res.type('svg');
-  res.status(200).send(captcha.data);
+    CAPTCHA_GENERADO = captcha.text;  // Guardamos el texto real
+    console.log(CAPTCHA_GENERADO);
+
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
+
+    res.type('svg');
+    res.status(200).send(captcha.data);
 };
+
 
 /* FUncion que valida el captcha*/
 function validaCaptcha(captcha){
@@ -141,6 +140,7 @@ function validaCaptcha(captcha){
 
   return false;
 };
+
 
 const resetPassword= async (req, res)=>{
     const {correo}=req.body;
@@ -231,4 +231,4 @@ const actualizarPasswordInDB= async (req, res)=>{
 
 
 
-module.exports={login, newUser, genCaptcha, resetPassword, validarTokenReset, actualizarPasswordInDB};
+module.exports={login, newUser, genCaptcha, resetPassword, validarTokenReset, actualizarPasswordInDB, validaCaptcha};

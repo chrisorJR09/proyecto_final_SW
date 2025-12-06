@@ -10,9 +10,9 @@ const authAdmin = (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+        console.log(decoded.role);
         // Verifica que el usuario sea administrador
-        if (decoded.rol !== "admin") {
+        if (decoded.role !== 1) {
             return res.status(403).json({ error: "Acceso denegado: Solo administradores" });
         }
 

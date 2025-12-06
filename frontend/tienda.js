@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/api/tienda";
+const API = "https://proyectofinalsw.onrender.com/api/tienda";
 
 // Mostrar en pantalla
 function render(data) {

@@ -9,7 +9,7 @@
     <!-- Formulario de Login -->
         <section id="formLgn" class="inactivo">
             <div>
-                <form action="url" method="POST">
+                <form >
                     <h2>Login</h2>
                     <label for="username">Usuario</label>
                     <input type="text" id="usernameL" name="username" required>
@@ -18,8 +18,8 @@
                     <input type="password" name="passwordL" id="passwordL" required>
 
                     <label for="captcha">Captcha</label>
-                    <div>
-                        <img src="" alt="" id="captchaImageL">
+                    <div class="captcha-img">
+                       <img id="captchaImage" alt="CAPTCHA" />
                     </div>
 
                     <input type="text" name="captcha" id="captchaL">
@@ -29,9 +29,12 @@
                         <a href="#formReg" id="regBtn">Registrarse</a>
                     </div>
 
-                    <button type="submit" class="formBtn">Aceptar</button>
+                   <button type="submit" class="formBtn" onclick="iniciarSesion(event)">Aceptar</button>
+                    <button onclick="recargarCaptcha()" style="background:#6c757d">Recargar CAPTCHA</button>
+                    <p id="mensaje"></p>
                 </form>
             </div>
         </section>
+        <script src="../js/login.js"></script>
 </body>
 </html>

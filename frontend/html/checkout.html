@@ -117,14 +117,37 @@
             </div>
 
             <!-- RESUMEN DESKTOP (se muestra solo en pantallas grandes) -->
-            <div class="resumen resumen-desktop">
-                <h2>Resumen de Compra</h2>
-                <p>Subtotal: <span id="subtotal">$0.00</span></p>
-                <p>Impuesto: <span id="impuesto">$0.00</span></p>
-                <p>Envío: <span id="envio">$0.00</span></p>
-                <hr>
-                <p><strong>Total: <span id="total">$0.00</span></strong></p>
-            </div>
+<div class="resumen resumen-desktop">
+    <h2>Resumen de Compra</h2>
+    
+    <!-- DESGLOSE DE PRODUCTOS -->
+    <div id="productos-resumen" style="margin-bottom: 15px; max-height: 300px; overflow-y: auto;">
+        <!-- Se llenará dinámicamente con JS -->
+    </div>
+    
+    <hr style="margin: 15px 0;">
+    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+    <p>Impuesto: <span id="impuesto">$0.00</span></p>
+    <p>Envío: <span id="envio">$0.00</span></p>
+    <hr>
+    <p><strong>Total: <span id="total">$0.00</span></strong></p>
+</div>
+<!-- RESUMEN MOBILE (se muestra solo en pantallas pequeñas) -->
+<div class="resumen resumen-mobile" style="display: none;">
+    <h2>Resumen de Compra</h2>
+    
+    <!-- DESGLOSE DE PRODUCTOS -->
+    <div id="productos-resumen-mobile" style="margin-bottom: 15px; max-height: 200px; overflow-y: auto;">
+        <!-- Se llenará dinámicamente con JS -->
+    </div>
+    
+    <hr style="margin: 15px 0;">
+    <p>Subtotal: <span id="subtotal-mobile">$0.00</span></p>
+    <p>Impuesto: <span id="impuesto-mobile">$0.00</span></p>
+    <p>Envío: <span id="envio-mobile">$0.00</span></p>
+    <hr>
+    <p><strong>Total: <span id="total-mobile">$0.00</span></strong></p>
+</div>
 
         </div>
     </main>

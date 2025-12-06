@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api/administrador";
+const API_URL = "https://proyectofinalsw.onrender.com/api/administrador";
 
 // GET ------------------------------------------------------------------------
 async function getProductos() {

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const res = await fetch("http://localhost:3000/api/suscripciones", {
+            const res = await fetch("https://proyectofinalsw.onrender.com/api/suscripciones", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

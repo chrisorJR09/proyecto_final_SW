@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/api/contacto", {
+            const response = await fetch("https://proyectofinalsw.onrender.com/api/contacto", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

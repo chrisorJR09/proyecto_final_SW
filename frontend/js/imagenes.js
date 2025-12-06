@@ -5,7 +5,7 @@ form.addEventListener("submit", async (e) => {
 
     const datos = new FormData(form);
 
-    const res = await fetch("http://localhost:3000/api/productos", {
+    const res = await fetch("https://proyectofinalsw.onrender.com/api/productos", {
         method: "POST",
         body: datos
     });
@@ -14,12 +14,12 @@ form.addEventListener("submit", async (e) => {
     console.log(data);
 });
 
-const res = await fetch("http://localhost:3000/api/productos");
+const res = await fetch("https://proyectofinalsw.onrender.com/api/productos");
 const productos = await res.json();
 
 productos.forEach(p => {
     const img = document.createElement("img");
-    img.src = "http://localhost:3000/uploads/" + p.imagen;
+    img.src = "https://proyectofinalsw.onrender.com/uploads/" + p.imagen;
     img.width = 200;
     document.body.appendChild(img);
 });

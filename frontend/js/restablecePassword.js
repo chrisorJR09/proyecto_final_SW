@@ -11,7 +11,7 @@ form.addEventListener('submit', async (e) => {
     // Guardar el correo para usarlo después
     localStorage.setItem("email", correo);
 
-    const res = await fetch("http://localhost:3000/sesion/resetPassword", {
+    const res = await fetch("https://proyectofinalsw.onrender.com/sesion/resetPassword", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo })

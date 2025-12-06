@@ -32,7 +32,7 @@ function mostrarInventario() {
 //   Gráfica Categoría
 // =========================
 async function obtenerDatosCategoria() {
-    const respuesta = await fetch("http://localhost:3000/api/ventas_producto");
+    const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/ventas_producto");
     return await respuesta.json();
 }
 
@@ -63,7 +63,7 @@ async function generarGraficaCategoria() {
 let graficaGeneral = null;
 
 async function obtenerVentasPorPeriodo(fechaInicio, fechaFin) {
-    const respuesta = await fetch(`http://localhost:3000/api/ventas_generales?inicio=${fechaInicio}&fin=${fechaFin}`);
+    const respuesta = await fetch(`https://proyectofinalsw.onrender.com/api/ventas_generales?inicio=${fechaInicio}&fin=${fechaFin}`);
     return await respuesta.json();
 }
 
@@ -107,7 +107,7 @@ async function generarGraficaGenerales() {
 //     Gráfica Inventario
 // =========================
 async function generarGraficaInventario() {
-    const respuesta = await fetch("http://localhost:3000/api/inventario_grafica");
+    const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/inventario_grafica");
     const datos = await respuesta.json();
 
     const labels = datos.map(item => item.producto);

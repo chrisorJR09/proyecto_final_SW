@@ -171,7 +171,7 @@ if (formBtn2) {
 
 
 /*Parte de mandar datos del login al backend*/
-const API_URL = "http://localhost:3000";
+const API_URL = "https://proyectofinalsw.onrender.com";
 function recargarCaptcha() {
     fetch(`${API_URL}/sesion/captcha`)
         .then(res => res.text())

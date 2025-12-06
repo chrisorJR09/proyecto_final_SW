@@ -20,6 +20,14 @@ class CarritoManager {
     // Agregar producto al carrito con validación de stock desde la BD
     async agregarProducto(producto) {
         try {
+
+            //validación de usuario con login 
+            const token=localStorage.getItem("token");
+            if(!token){
+                alert("Por favor inicia sesión para agregar productos al carrito");
+                return;
+            }
+
             const response = await fetch(`${API_BASE_URL}/api/productos/${producto.id}`);
             const productoDB = await response.json();
 
@@ -37,7 +45,7 @@ class CarritoManager {
                     ...producto,
                     cantidad: 1,
                     stock: productoDB.stock,
-                    precio: Number(productoDB.precio)
+                    precio: Number(productoDB.precio),
                 });
             }
 

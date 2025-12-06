@@ -25,7 +25,8 @@
             <a href="contacto.html">Contacto</a>
             <a href="nosotros.html">Nosotros</a>
             <a href="FAQ.html">FAQ</a>
-            <a href="admin.html">Panel Admin</a>
+            <a href="admin.html" id="adminLink" style="display:none;">Panel Admin</a>
+
         </nav>
 
         <div class="header-right">
@@ -195,6 +196,7 @@ async function cargarProductos() {
     try {
         const respuesta = await fetch(`${API_BASE_URL}/api/productos`);
         const productos = await respuesta.json();
+        console.log(productos);
 
         container.innerHTML = "";
 

@@ -53,6 +53,9 @@ document.getElementById("checkout-form").addEventListener("submit", async functi
         email: document.getElementById("email").value,
         telefono: document.getElementById("telefono").value,
         direccion: document.getElementById("direccion").value,
+        ciudad: document.getElementById("ciudad").value,
+        codigo_postal: document.getElementById("codigo_postal").value,
+        pais: document.getElementById("pais").value,
         metodo: document.querySelector("input[name='pago']:checked").value,
         productos: carrito
     };

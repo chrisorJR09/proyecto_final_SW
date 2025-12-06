@@ -101,33 +101,33 @@ body {
 }
 
 /* ===========================
-   HERO CHECKOUT
+   HERO CONTACTO
    =========================== */
 
-.checkout-hero {
+.contact-hero {
     text-align: center;
     padding: 80px 20px;
     background: linear-gradient(135deg, #0b2f23 0%, #1a4d3a 100%);
     color: white;
 }
 
-.checkout-hero h1 {
+.contact-hero h1 {
     font-size: 3rem;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
-.checkout-hero p {
+.contact-hero p {
     font-size: 1.2rem;
     color: #cdeee1;
 }
 
 /* ===========================
-   CONTENIDO PRINCIPAL
+   MAIN CONTENT
    =========================== */
 
-.checkout-main {
-    max-width: 800px;
+.contact-main {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 60px 20px;
 }
@@ -135,6 +135,10 @@ body {
 /* ===========================
    FORMULARIO
    =========================== */
+
+.contact-form-section {
+    margin-bottom: 80px;
+}
 
 .form-container {
     background: white;
@@ -144,33 +148,46 @@ body {
     border: 1px solid #e8e8e8;
 }
 
-h2 {
-    font-size: 1.8rem;
+.form-container h2 {
+    font-size: 2rem;
     color: #0b2f23;
-    margin: 30px 0 20px 0;
-    font-weight: 600;
-    border-bottom: 2px solid #ffd700;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
-h2:first-of-type {
-    margin-top: 0;
+.form-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
 }
 
-label {
-    display: block;
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
     font-weight: 600;
-    margin-top: 15px;
     margin-bottom: 8px;
     color: #0b2f23;
     font-size: 0.95rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="month"],
-select {
-    width: 100%;
+.form-group input,
+.form-group select,
+.form-group textarea {
     padding: 14px 16px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
@@ -178,195 +195,140 @@ select {
     transition: 0.2s;
     outline: none;
     font-family: inherit;
-    margin-bottom: 5px;
-    background: #ffffff;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="month"]:focus,
-select:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     border-color: #ffd700;
     box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
-select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230b2f23' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
+.form-group textarea {
+    resize: vertical;
 }
 
-/* ===========================
-   MÉTODOS DE PAGO
-   =========================== */
-
-.metodos {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.metodos label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: #fdf8ee;
-    border: 2px solid #e8e8e8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-    margin: 0;
-}
-
-.metodos label:hover {
-    border-color: #ffd700;
-    background: #fffef8;
-    transform: translateX(5px);
-}
-
-.metodos input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #ffd700;
-}
-
-#extra-pago {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f0f9ff;
-    border-radius: 10px;
-    border: 1px solid #bae6fd;
-}
-
-#extra-pago p {
-    color: #0c4a6e;
-    line-height: 1.8;
-    margin: 5px 0;
-}
-
-#extra-pago strong,
-#extra-pago b {
-    color: #0b2f23;
-}
-
-#extra-pago label {
-    margin-top: 12px;
-    color: #0c4a6e;
-}
-
-/* ===========================
-   BOTÓN SUBMIT
-   =========================== */
-
-button[type="submit"] {
-    margin-top: 30px;
-    width: 100%;
-    padding: 16px 32px;
-    border: none;
+.btn-submit {
     background: #ffd700;
     color: #0b2f23;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 10px;
     font-size: 1.1rem;
     font-weight: 700;
-    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: 0.3s;
+    margin-top: 10px;
 }
 
-button[type="submit"]:hover {
+.btn-submit:hover {
     background: #ffed4e;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
 }
 
 /* ===========================
-   PROCESANDO
+   INFORMACIÓN DE CONTACTO
    =========================== */
 
-#procesando {
-    margin-top: 30px;
+.contact-info-section {
+    margin-bottom: 80px;
+}
+
+.contact-info-section h2 {
     text-align: center;
-    background: white;
-    padding: 60px 40px;
-    border-radius: 16px;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.oculto {
-    display: none;
-}
-
-.loader {
-    margin: 0 auto 25px;
-    border: 5px solid #ffd700;
-    border-top: 5px solid #0b2f23;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-#procesando p {
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     color: #0b2f23;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.info-card {
+    background: white;
+    padding: 35px 25px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #0b2f23;
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    color: #0b2f23;
+    margin-bottom: 15px;
     font-weight: 600;
+}
+
+.info-card p {
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.social-links a {
+    color: #0b2f23;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.social-links a:hover {
+    color: #ffd700;
 }
 
 /* ===========================
-   RESULTADO
+   MAPA
    =========================== */
 
-#resultado {
-    margin-top: 30px;
-    background: #ffffff;
-    padding: 50px 40px;
-    border-radius: 16px;
+.map-section {
+    margin-bottom: 60px;
+}
+
+.map-section h2 {
     text-align: center;
+    font-size: 2.2rem;
+    color: #0b2f23;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     border: 1px solid #e8e8e8;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-#resultado h2 {
-    color: #0b2f23;
-    font-size: 2rem;
-    margin: 0 0 15px 0;
-    border: none;
-    padding: 0;
-}
-
-#resultado p {
-    color: #666;
-    margin: 10px 0;
-    line-height: 1.6;
-    font-size: 1.05rem;
-}
-
-#resultado a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 28px;
-    background: #ffd700;
-    color: #0b2f23;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-#resultado a:hover {
-    background: #ffed4e;
-    transform: translateY(-2px);
 }
 
 /* ===========================
@@ -551,8 +513,12 @@ button[type="submit"]:hover {
         justify-content: center;
     }
 
-    .checkout-hero h1 {
+    .contact-hero h1 {
         font-size: 2.2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 
     .form-container {
@@ -567,7 +533,7 @@ button[type="submit"]:hover {
         padding: 40px 30px;
     }
 
-    .checkout-main {
-        padding: 40px 15px;
+    .info-cards {
+        grid-template-columns: 1fr;
     }
 }

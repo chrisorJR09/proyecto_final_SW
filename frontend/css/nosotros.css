@@ -97,276 +97,306 @@ body {
 
 .small-link:last-child:hover {
     background: #ffed4e;
-    color: #0b2f23;
 }
 
 /* ===========================
-   HERO CHECKOUT
+   HERO NOSOTROS
    =========================== */
 
-.checkout-hero {
-    text-align: center;
-    padding: 80px 20px;
+.about-hero {
     background: linear-gradient(135deg, #0b2f23 0%, #1a4d3a 100%);
+    padding: 100px 20px;
+    text-align: center;
     color: white;
 }
 
-.checkout-hero h1 {
-    font-size: 3rem;
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    color: #cdeee1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   MAIN CONTENT
+   =========================== */
+
+.about-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+/* ===========================
+   HISTORIA
+   =========================== */
+
+.story-section {
+    margin-bottom: 100px;
+}
+
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.text-content h2 {
+    font-size: 2.5rem;
+    color: #0b2f23;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.text-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.image-content img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* ===========================
+   EQUIPO
+   =========================== */
+
+.team-section {
+    margin-bottom: 100px;
+}
+
+.team-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0b2f23;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
-.checkout-hero p {
-    font-size: 1.2rem;
-    color: #cdeee1;
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 60px;
 }
 
-/* ===========================
-   CONTENIDO PRINCIPAL
-   =========================== */
-
-.checkout-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 60px 20px;
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
 }
 
-/* ===========================
-   FORMULARIO
-   =========================== */
-
-.form-container {
+.team-member {
     background: white;
-    padding: 50px;
+    padding: 30px;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    border: 1px solid #e8e8e8;
+    text-align: center;
+    border: 2px solid #ffd700;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-h2 {
-    font-size: 1.8rem;
+.team-member:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.3);
+}
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #ffd700;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-member h3 {
+    font-size: 1.3rem;
     color: #0b2f23;
-    margin: 30px 0 20px 0;
-    font-weight: 600;
-    border-bottom: 2px solid #ffd700;
-    padding-bottom: 10px;
-}
-
-h2:first-of-type {
-    margin-top: 0;
-}
-
-label {
-    display: block;
-    font-weight: 600;
-    margin-top: 15px;
     margin-bottom: 8px;
-    color: #0b2f23;
+    font-weight: 600;
+}
+
+.member-role {
+    color: #ffd700;
+    font-weight: 600;
+    margin-bottom: 12px;
     font-size: 0.95rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="month"],
-select {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: 0.2s;
-    outline: none;
-    font-family: inherit;
-    margin-bottom: 5px;
-    background: #ffffff;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="month"]:focus,
-select:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-}
-
-select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230b2f23' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-}
-
-/* ===========================
-   MÉTODOS DE PAGO
-   =========================== */
-
-.metodos {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.metodos label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: #fdf8ee;
-    border: 2px solid #e8e8e8;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
-    margin: 0;
-}
-
-.metodos label:hover {
-    border-color: #ffd700;
-    background: #fffef8;
-    transform: translateX(5px);
-}
-
-.metodos input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #ffd700;
-}
-
-#extra-pago {
-    margin-top: 20px;
-    padding: 20px;
-    background: #f0f9ff;
-    border-radius: 10px;
-    border: 1px solid #bae6fd;
-}
-
-#extra-pago p {
-    color: #0c4a6e;
-    line-height: 1.8;
-    margin: 5px 0;
-}
-
-#extra-pago strong,
-#extra-pago b {
-    color: #0b2f23;
-}
-
-#extra-pago label {
-    margin-top: 12px;
-    color: #0c4a6e;
-}
-
-/* ===========================
-   BOTÓN SUBMIT
-   =========================== */
-
-button[type="submit"] {
-    margin-top: 30px;
-    width: 100%;
-    padding: 16px 32px;
-    border: none;
-    background: #ffd700;
-    color: #0b2f23;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-button[type="submit"]:hover {
-    background: #ffed4e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
-}
-
-/* ===========================
-   PROCESANDO
-   =========================== */
-
-#procesando {
-    margin-top: 30px;
-    text-align: center;
-    background: white;
-    padding: 60px 40px;
-    border-radius: 16px;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.oculto {
-    display: none;
-}
-
-.loader {
-    margin: 0 auto 25px;
-    border: 5px solid #ffd700;
-    border-top: 5px solid #0b2f23;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-#procesando p {
-    font-size: 1.2rem;
-    color: #0b2f23;
-    font-weight: 600;
-}
-
-/* ===========================
-   RESULTADO
-   =========================== */
-
-#resultado {
-    margin-top: 30px;
-    background: #ffffff;
-    padding: 50px 40px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-#resultado h2 {
-    color: #0b2f23;
-    font-size: 2rem;
-    margin: 0 0 15px 0;
-    border: none;
-    padding: 0;
-}
-
-#resultado p {
+.member-desc {
     color: #666;
-    margin: 10px 0;
+    font-size: 0.95rem;
     line-height: 1.6;
-    font-size: 1.05rem;
 }
 
-#resultado a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 28px;
-    background: #ffd700;
+/* ===========================
+   OBJETIVOS
+   =========================== */
+
+.goals-section {
+    margin-bottom: 100px;
+}
+
+.goals-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
     color: #0b2f23;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s;
+    margin-bottom: 60px;
+    font-weight: 700;
 }
 
-#resultado a:hover {
-    background: #ffed4e;
-    transform: translateY(-2px);
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.goal-card {
+    background: #f9fafb;
+    padding: 35px 25px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    transition: 0.3s;
+}
+
+.goal-card:hover {
+    background: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.goal-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.goal-card h3 {
+    font-size: 1.3rem;
+    color: #0b2f23;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.goal-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ===========================
+   TECNOLOGÍAS
+   =========================== */
+
+.tech-section {
+    margin-bottom: 100px;
+}
+
+.tech-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0b2f23;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.tech-card {
+    background: linear-gradient(135deg, #0b2f23 0%, #1a4d3a 100%);
+    padding: 35px 30px;
+    border-radius: 12px;
+    color: white;
+}
+
+.tech-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.tech-card ul {
+    list-style: none;
+}
+
+.tech-card li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cdeee1;
+}
+
+.tech-card li:last-child {
+    border-bottom: none;
+}
+
+/* ===========================
+   VALORES
+   =========================== */
+
+.values-section {
+    margin-bottom: 80px;
+}
+
+.values-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0b2f23;
+    margin-bottom: 60px;
+    font-weight: 700;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.value-item {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.value-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.value-item h3 {
+    font-size: 1.4rem;
+    color: #0b2f23;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.value-item p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 /* ===========================
@@ -551,23 +581,38 @@ button[type="submit"]:hover {
         justify-content: center;
     }
 
-    .checkout-hero h1 {
-        font-size: 2.2rem;
+    .hero-content h1 {
+        font-size: 2.5rem;
     }
 
-    .form-container {
-        padding: 35px 25px;
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
         padding: 40px 30px;
     }
 
-    .checkout-main {
-        padding: 40px 15px;
+    .goals-grid,
+    .tech-grid,
+    .values-container {
+        grid-template-columns: 1fr;
     }
 }

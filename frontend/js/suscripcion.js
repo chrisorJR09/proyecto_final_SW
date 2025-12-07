@@ -16,13 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const res = await fetch("https://proyectofinalsw.onrender.com/api/suscripciones", {
+            const res = await fetch("https://proyectofinalsw.onrender.com/suscripciones", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ correo })
             });
+
 
             const data = await res.json();
 

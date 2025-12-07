@@ -182,7 +182,7 @@ const resetPassword= async (req, res)=>{
         });
 
         await transporter.sendMail({
-            from: '"Soporte TecnoMex" <${process.env.EMAIL_USER}>',
+            from:  `Soporte TecnoMex" <${process.env.EMAIL_USER}>`,
             to: correo,
             subject: "Restablece tu contraseña",
             html: 

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (usuario && token) {
             header.innerHTML = `
                 <span class="small-link">Hola, <strong>${usuario}</strong></span>
-                <a href="#" class="small-link" id="logoutBtn">Cerrar sesión</a>
+                <a href="index.html" class="small-link" id="logoutBtn">Cerrar sesión</a>
             `;
 
             document.getElementById("logoutBtn").addEventListener("click", () => {

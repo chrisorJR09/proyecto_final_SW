@@ -44,7 +44,7 @@ function iniciarSesion(event) {
                 localStorage.setItem("usuario", data.usuario);
 
                 setTimeout(() => {
-                    window.location.href = "../html/inicio.html";
+                    window.location.href = "../html/index.html";
                 }, 1500);
 
             } else {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/newUser.css">
+    <title>Registro de Usuario</title>
+</head>
+    <body>
+
+    <div class="register-container">
+
+        <h2>Registrar Usuario</h2>
+
+        <input id="userName" type="text" placeholder="Usuario">
+        <input id="password" type="password" placeholder="Contraseña">
+        <input id="email" type="email" placeholder="Correo">
+        <input id="nombre" type="text" placeholder="Nombre">
+        <input id="apellido" type="text" placeholder="Apellido">
+        <div class="captcha-img">
+            <img id="captchaImage" alt="CAPTCHA" />
+        </div>
+        <input id="captchaInput" type="text" placeholder="Ingrese el CAPTCHA">
+
+
+        <button onclick="registrar()">Crear Cuenta</button>
+        <button onclick="recargarCaptcha()" style="background:#6c757d">Recargar CAPTCHA</button>
+
+        <p id="mensaje"></p>
+
+        <div class="to-login">
+            <a href="login.html">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+    </div>
+    <script src="../js/newUser.js"></script>
+</body>
+</html>

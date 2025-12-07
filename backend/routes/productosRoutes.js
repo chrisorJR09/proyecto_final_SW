@@ -5,16 +5,13 @@ const upload = require('../multer.config');
 const {
     getAllProductos,
     getProductoById,
-    crearProducto,
-    //actualizarProducto,
-    //eliminarProducto
 } = require('../controllers/productosController');
 
 
-const authUser=require("../middlewares/validaUsuario");
+//const authUser=require("../middlewares/validaUsuario");
 
 // Obtener todos los productos
-router.get('/', authUser, getAllProductos);
+router.get('/',getAllProductos);
 
 // Obtener un producto por ID
 router.get('/:id', getProductoById);

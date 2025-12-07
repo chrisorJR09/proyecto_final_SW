@@ -14,7 +14,7 @@ const {
 
  
 // Rutas para ventas por producto
-router.get('/', authAdmin, getVentasProducto);
-router.get('/:id', authAdmin, getVentasProductoById);
+router.get('/', getVentasProducto);
+router.get('/:id',getVentasProductoById);
 
 module.exports = router;

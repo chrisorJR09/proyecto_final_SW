@@ -15,8 +15,8 @@
     router.post("/newUser", newUser);
 
     router.get('/captcha', genCaptcha);
-    router.post("/resetPassword", resetPassword);
-    router.get("/resetPassword/:token", validarTokenReset);
-    router.post("/setNewPassword", actualizarPasswordInDB);
+    router.post('/resetPassword', resetPassword);
+    router.get('/resetPassword/:token', validarTokenReset);
+    router.post('/setNewPassword', actualizarPasswordInDB);
 
     module.exports = router;

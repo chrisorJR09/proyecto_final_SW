@@ -169,8 +169,8 @@ const resetPassword= async (req, res)=>{
 
         await guardarTokenReset(correo, token, expiracion);
 
-        //const resetLink = `http://localhost:3000/sesion/resetPassword/${token}`;
-        const resetLink = `http://localhost:5501/proyecto_final_SW/frontend/html/nuevoPassword.html?token=${token}`;
+        const resetLink = `http://localhost:5500/frontend/html/nuevoPassword.html?token=${token}`;
+        //const resetLink = `http://localhost:5501/proyecto_final_SW/frontend/html/nuevoPassword.html?token=${token}`;
         
 
         const transporter = nodemailer.createTransport({

@@ -52,25 +52,17 @@ app.use('/api/tienda', funcionesTienda);
 const ventasRoutes = require('./routes/ventasRoutes');
 app.use('/api/ventas', ventasRoutes);
 
-<<<<<<< HEAD
 const suscripcionRoute = require('./routes/suscripciones.route');
 app.use('/api/suscripciones', suscripcionRoute);
 
 const contactoRoutes = require('./routes/contacto.route');
 app.use('/api/contacto', contactoRoutes);
 
-=======
->>>>>>> 92ded4432f76c880c5f7838bf9a9112c6b447528
 const ticketRoutes = require("./routes/ticketRoutes");
 app.use("/api/ticket", ticketRoutes);
 
 const carritoRoutes = require('./routes/carritoRoutes');
 app.use('/api/carrito', carritoRoutes);
-const suscripcionRoute = require('./routes/suscripciones.route');
-app.use('/api/suscripciones', suscripcionRoute);
-
-const contactoRoutes = require('./routes/contacto.route');
-app.use('/api/contacto', contactoRoutes);
 
 
 // Para poder acceder a las imágenes desde el front

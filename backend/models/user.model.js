@@ -1,4 +1,4 @@
-const pool=require("../db_conection/conection");
+const pool=require("../db_conection/conexion");
 
 async function obtenerUsuario(user) {
     const [rows] = await pool.query(

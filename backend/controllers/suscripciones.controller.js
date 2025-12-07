@@ -27,10 +27,6 @@ const postSuscripcion = async (req, res) => {
             }
         });
 
-<<<<<<< HEAD
-=======
-        const logoURL = "https://i.imgur.com/9v3hZ5B.png";
->>>>>>> 92ded4432f76c880c5f7838bf9a9112c6b447528
 
         await transporter.sendMail({
             from: `Soporte "${EMPRESA_NOMBRE}" <${process.env.EMAIL_USER}>`,

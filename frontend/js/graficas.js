@@ -10,7 +10,7 @@ const inventarioSection = document.getElementById("inventarioSection");
 const API_BASE_URL = "https://proyectofinalsw.onrender.com"; 
 
 async function cargarDatosCategoria() {
-    const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/ventas_producto");
+    const respuesta = await fetch(`https://proyectofinalsw.onrender.com/api/ventas_producto`);
     const data = await respuesta.json();
 
     // Ordenar por mayor venta para obtener la categoría top
@@ -37,7 +37,7 @@ async function cargarDatosCategoria() {
 
 async function cargarDatosInventario() {
     try {
-        const respuesta = await fetch("https://proyectofinalsw.onrender.com/api/inventario_grafica");
+        const respuesta = await fetch(`https://proyectofinalsw.onrender.com/api/inventario_grafica`);
         const data = await respuesta.json();
 
         // Detectar automáticamente el nombre del campo
@@ -130,7 +130,7 @@ function mostrarInventario() {
 
 //   Gráfica Categoría
 async function obtenerDatosCategoria() {
-    const respuesta = await fetch(`${API_BASE_URL}/api/ventas_producto`)
+    const respuesta = await fetch(`https://proyectofinalsw.onrender.com/api/ventas_producto`)
     return await respuesta.json();
 }
 

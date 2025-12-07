@@ -15,12 +15,12 @@ const {
 } = require("../controllers/admin.controller.js");
 
 // PROTEGER TODAS LAS RUTAS DE ADMIN
-router.use(authAdmin);
+//router.use(authAdmin);
 
-router.get('/', authAdmin, getProducto);
-router.post('/', authAdmin, postProducto);
-router.put('/:id', authAdmin, putProducto);
-router.delete('/:id', authAdmin, deleteProducto);
-router.post('/cambiarStock/:id', authAdmin, postCambiarStock);
+router.get('/', getProducto);
+router.post('/',  postProducto);
+router.put('/:id',  putProducto);
+router.delete('/:id',  deleteProducto);
+router.post('/cambiarStock/:id', postCambiarStock);
 
 module.exports = router;

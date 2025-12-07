@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-// const API_URL = "http://localhost:3000"; // Cambia el puerto si tu backend usa otro
 const API_URL = "https://proyectofinalsw.onrender.com"; // Cambia el puerto si tu backend usa otro
-=======
-const API_URL = "https://proyectofinalsw.onrender.com"; 
->>>>>>> 92ded4432f76c880c5f7838bf9a9112c6b447528
+//const API_URL = "https://proyectofinalsw.onrender.com"; // Cambia el puerto si tu backend usa otro
 
 function recargarCaptcha() {
     fetch(`${API_URL}/sesion/captcha`)
